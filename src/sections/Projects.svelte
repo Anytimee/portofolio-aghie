@@ -91,7 +91,7 @@
 					>
 						<div class="thumb-inner">
 							<img 
-								src={project.image || "/src/assets/project/project1.png"} 
+								src={project.image || "/project1.png"} 
 								alt={project.title}
 								class="thumb-img"
 								loading="lazy"

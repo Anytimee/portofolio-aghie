@@ -36,7 +36,7 @@
 		// Load avatar texture
 		const textureLoader = new THREE.TextureLoader();
 		textureLoader.load(
-			'/src/assets/avatar/avatar.jpg',
+			'/avatar.jpg',
 			(texture) => {
 				// Create photo frame geometry
 				const frameGeometry = new THREE.BoxGeometry(2.4, 3, 0.15);
