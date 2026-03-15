@@ -3,7 +3,7 @@
 	import { Card, CardContent, CardHeader } from "$lib/components/ui";
 	import { Input } from "$lib/components/ui";
 	import { Button } from "$lib/components/ui";
-	import { Mail, MapPin, Clock, Send, CheckCircle } from "lucide-svelte";
+	import { Mail, MapPin, Clock, Send, CheckCircle, MessageCircle } from "lucide-svelte";
 	import { scrollDirectionAnimate } from "$lib/utils/animation";
 
 	let name = $state("");
@@ -14,6 +14,7 @@
 	let errors = $state({ name: "", email: "", message: "" });
 
 	const profileEmail = profile.email;
+	const profileWhatsApp = profile.whatsapp;
 	const profileLocation = profile.location;
 
 	function validateEmail(email: string): boolean {
@@ -64,6 +65,17 @@
 		message = "";
 
 		setTimeout(() => { submitStatus = "idle"; }, 5000);
+	}
+
+	function handleWhatsApp() {
+		if (!name.trim() || !message.trim()) {
+			errors = { name: name.trim() ? "" : "Name is required", email: "", message: message.trim() ? "" : "Message is required" };
+			return;
+		}
+		
+		const whatsappMessage = `Hi ${name}, ${message}`;
+		const whatsappUrl = `https://wa.me/${profileWhatsApp}?text=${encodeURIComponent(whatsappMessage)}`;
+		window.open(whatsappUrl, '_blank');
 	}
 </script>
 
@@ -148,17 +160,16 @@
 								{/if}
 							</div>
 
+
+
 							<Button 
-								type="submit" 
-								class="w-full rounded-sm bg-espresso-800 hover:bg-espresso-700 dark:bg-gold-500 dark:hover:bg-gold-400 dark:text-espresso-900 font-medium transition-all duration-300"
+								type="button"
+								onclick={handleWhatsApp}
+								class="w-full rounded-sm bg-green-500 hover:bg-green-600 text-white font-medium transition-all duration-300 mt-3"
 								disabled={isSubmitting}
 							>
-								{#if isSubmitting}
-									Sending...
-								{:else}
-									<Send class="w-4 h-4 mr-2" />
-									Send Message
-								{/if}
+								<MessageCircle class="w-4 h-4 mr-2" />
+								Send via WhatsApp
 							</Button>
 
 							{#if submitStatus === "success"}
@@ -200,6 +211,17 @@
 							<div>
 								<p class="font-medium text-espresso-800 dark:text-cream-100">Email</p>
 								<a href="mailto:{profileEmail}" class="text-muted-foreground hover:text-gold-500 transition-colors">{profileEmail}</a>
+							</div>
+						</div>
+
+						<!-- WhatsApp -->
+						<div class="flex items-start gap-4 p-4 rounded-sm bg-muted/30 border border-border/50">
+							<div class="w-11 h-11 rounded-sm bg-espresso-100 dark:bg-espresso-800 flex items-center justify-center flex-shrink-0">
+								<MessageCircle class="w-5 h-5 text-green-500" />
+							</div>
+							<div>
+								<p class="font-medium text-espresso-800 dark:text-cream-100">WhatsApp</p>
+								<a href="https://wa.me/{profileWhatsApp}" target="_blank" class="text-muted-foreground hover:text-green-500 transition-colors">Chat on WhatsApp</a>
 							</div>
 						</div>
 

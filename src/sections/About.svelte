@@ -22,14 +22,14 @@
 		
 		// Camera
 		const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
-		camera.position.z = 5;
+		camera.position.z = 6;
 		
 		// Renderer
 		const renderer = new THREE.WebGLRenderer({ 
 			alpha: true, 
 			antialias: true 
 		});
-		renderer.setSize(300, 300);
+		renderer.setSize(400, 500);
 		renderer.setPixelRatio(window.devicePixelRatio);
 		canvasContainer.appendChild(renderer.domElement);
 		
@@ -39,7 +39,7 @@
 			'/avatar.jpg',
 			(texture) => {
 				// Create photo frame geometry
-				const frameGeometry = new THREE.BoxGeometry(2.4, 3, 0.15);
+				const frameGeometry = new THREE.BoxGeometry(3, 3.8, 0.15);
 				
 				// Create materials for each face
 				const frameMaterial = new THREE.MeshStandardMaterial({
@@ -67,7 +67,7 @@
 				scene.add(frame);
 				
 				// Add glow effect
-				const glowGeometry = new THREE.BoxGeometry(2.6, 3.2, 0.1);
+				const glowGeometry = new THREE.BoxGeometry(3.2, 4, 0.1);
 				const glowMaterial = new THREE.MeshBasicMaterial({
 					color: 0xd4af37,
 					transparent: true,
@@ -107,7 +107,7 @@
 			(err) => {
 				console.error('Error loading texture:', err);
 				// Fallback: create a simple colored frame
-				const geometry = new THREE.BoxGeometry(2.4, 3, 0.15);
+				const geometry = new THREE.BoxGeometry(3, 3.8, 0.15);
 				const material = new THREE.MeshStandardMaterial({
 					color: 0xd4af37,
 					metalness: 0.5,
@@ -187,7 +187,7 @@
 						<!-- 3D Canvas Container -->
 						<div 
 							bind:this={canvasContainer}
-							class="w-64 h-80 md:w-72 md:h-90 cursor-pointer"
+							class="w-80 h-96 md:w-96 md:h-[30rem] cursor-pointer"
 							style="perspective: 1000px;"
 						></div>
 						

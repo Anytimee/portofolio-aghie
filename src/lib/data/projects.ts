@@ -16,23 +16,5 @@ export const projects = [
     technologies: ["React", "Svelte", "TailwindCSS", "Supabase"],
     demoUrl: "https://ruang-indah.vercel.app/",
     githubUrl: "https://github.com/user/coffee-shop"
-  },
-  {
-    id: 3,
-    title: "Portfolio Website",
-    description: "A modern, responsive portfolio website built with Svelte and TailwindCSS featuring smooth animations and 3D elements.",
-    image: "",
-    technologies: ["Svelte", "SvelteKit", "TailwindCSS", "Three.js"],
-    demoUrl: "https://demo.com",
-    githubUrl: "https://github.com/user/portfolio"
-  },
-  {
-    id: 4,
-    title: "Weather Dashboard",
-    description: "An interactive weather dashboard with real-time data, beautiful visualizations, and location-based forecasts.",
-    image: "",
-    technologies: ["React", "TypeScript", "Chart.js", "OpenWeather API"],
-    demoUrl: "https://demo.com",
-    githubUrl: "https://github.com/user/weather-dashboard"
   }
 ];

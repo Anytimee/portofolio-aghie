@@ -89,16 +89,28 @@
 						class="project-thumb"
 						onclick={() => selectProject(project.id)}
 					>
-						<div class="thumb-inner">
-							<img 
-								src={project.image || "/project1.png"} 
-								alt={project.title}
-								class="thumb-img"
-								loading="lazy"
-							/>
-							<div class="thumb-overlay">
-								<span class="thumb-title">{projectTitles[index]}</span>
+						<!-- Monitor/TV Frame -->
+						<div class="monitor-frame">
+							<!-- Monitor Screen -->
+							<div class="monitor-screen">
+								<img 
+									src={project.image || "/project1.png"} 
+									alt={project.title}
+									class="monitor-img"
+									loading="lazy"
+								/>
+								<div class="monitor-overlay">
+									<span class="monitor-title">{projectTitles[index]}</span>
+								</div>
 							</div>
+							<!-- Monitor Stand -->
+							<div class="monitor-stand">
+								<div class="monitor-base"></div>
+							</div>
+						</div>
+						<!-- Project Label -->
+						<div class="project-label">
+							<span class="text-xs uppercase tracking-[0.2em] text-gold-500">Click to preview</span>
 						</div>
 					</button>
 				{/each}
@@ -190,44 +202,119 @@
 	}
 
 	.project-thumb:hover {
-		transform: scale(1.05);
+		transform: translateY(-8px);
 	}
 
-	.thumb-inner {
-		position: relative;
-		border-radius: 24px;
-		overflow: hidden;
-		aspect-ratio: 16/9;
-		box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+	/* Monitor Frame */
+	.monitor-frame {
 		width: 100%;
-		min-height: 200px;
+		max-width: 500px;
+		margin: 0 auto;
+		background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+		border-radius: 16px;
+		padding: 12px;
+		box-shadow: 
+			0 0 0 2px rgba(255,255,255,0.1),
+			0 0 0 6px rgba(0,0,0,0.3),
+			0 20px 50px rgba(0,0,0,0.5);
 	}
 
-	@media (min-width: 768px) {
-		.thumb-inner {
-			height: 350px;
-		}
+	.monitor-screen {
+		width: 100%;
+		aspect-ratio: 16/10;
+		background: #000;
+		border-radius: 8px;
+		overflow: hidden;
+		position: relative;
 	}
 
-	.thumb-img {
+	.monitor-img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		transition: transform 0.5s ease;
 	}
 
-	.thumb-overlay {
+	.project-thumb:hover .monitor-img {
+		transform: scale(1.05);
+	}
+
+	.monitor-overlay {
 		position: absolute;
 		bottom: 0;
 		left: 0;
 		right: 0;
 		padding: 16px;
-		background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+		background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
 	}
 
-	.thumb-title {
+	.monitor-title {
 		color: #fff;
-		font-weight: 600;
-		font-size: 18px;
+		font-weight: 700;
+		font-size: 16px;
+		text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+	}
+
+	/* Monitor Stand */
+	.monitor-stand {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-top: 8px;
+	}
+
+	.monitor-stand::before {
+		content: '';
+		width: 60px;
+		height: 8px;
+		background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
+		border-radius: 4px 4px 0 0;
+	}
+
+	.monitor-base {
+		width: 100px;
+		height: 6px;
+		background: linear-gradient(180deg, #333 0%, #222 100%);
+		border-radius: 0 0 4px 4px;
+	}
+
+	/* Project Label */
+	.project-label {
+		text-align: center;
+		margin-top: 12px;
+		opacity: 0.7;
+	}
+
+	/* Responsive Styles */
+	@media (max-width: 640px) {
+		.monitor-frame {
+			max-width: 100%;
+			padding: 8px;
+			border-radius: 12px;
+		}
+
+		.monitor-title {
+			font-size: 14px;
+		}
+
+		.monitor-stand::before {
+			width: 40px;
+			height: 6px;
+		}
+
+		.monitor-base {
+			width: 70px;
+			height: 4px;
+		}
+	}
+
+	@media (min-width: 768px) and (max-width: 1024px) {
+		.monitor-frame {
+			max-width: 400px;
+		}
 	}
 
 	/* Close Button */

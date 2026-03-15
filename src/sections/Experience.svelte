@@ -3,13 +3,16 @@
 	import { Card, CardContent, CardHeader } from "$lib/components/ui";
 	import { GraduationCap, Briefcase, Code, Trophy, Calendar } from "lucide-svelte";
 	import { scrollDirectionAnimate } from "$lib/utils/animation";
+	import { onMount } from "svelte";
+
+	let cardRefs: HTMLDivElement[] = [];
 
 	const typeColors: Record<string, string> = {
-		education: "bg-blue-500",
-		project: "bg-green-500",
-		extracurricular: "bg-purple-500",
-		internship: "bg-orange-500",
-		competition: "bg-yellow-500"
+		education: "from-blue-500 to-blue-600",
+		project: "from-green-500 to-green-600",
+		extracurricular: "from-purple-500 to-purple-600",
+		internship: "from-orange-500 to-orange-600",
+		competition: "from-yellow-500 to-yellow-600"
 	};
 
 	const typeIcons: Record<string, any> = {
@@ -21,11 +24,34 @@
 	};
 
 	function getTypeColor(type: string): string {
-		return typeColors[type] || "bg-gold-500";
+		return typeColors[type] || "from-gold-500 to-gold-600";
 	}
 
 	function getTypeIcon(type: string) {
 		return typeIcons[type] || Briefcase;
+	}
+
+	function handleMouseMove(event: MouseEvent, index: number) {
+		const card = cardRefs[index];
+		if (!card) return;
+
+		const rect = card.getBoundingClientRect();
+		const x = event.clientX - rect.left;
+		const y = event.clientY - rect.top;
+
+		const centerX = rect.width / 2;
+		const centerY = rect.height / 2;
+
+		const rotateX = (y - centerY) / 20;
+		const rotateY = (centerX - x) / 20;
+
+		card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+	}
+
+	function handleMouseLeave(index: number) {
+		const card = cardRefs[index];
+		if (!card) return;
+		card.style.transform = "perspective(1000px) rotateX(0) rotateY(0) scale(1)";
 	}
 </script>
 
@@ -36,11 +62,12 @@
 	<!-- Background -->
 	<div class="absolute inset-0 bg-dots opacity-30"></div>
 
-	<!-- Mysterious gradient overlay -->
-	<div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-background/30 via-transparent to-background/30"></div>
+	<!-- Gradient orbs -->
+	<div class="absolute top-1/4 -left-32 w-64 h-64 bg-gold-500/10 rounded-full blur-3xl"></div>
+	<div class="absolute bottom-1/4 -right-32 w-64 h-64 bg-gold-500/10 rounded-full blur-3xl"></div>
 
 	<div class="container mx-auto px-6 relative z-10">
-		<!-- Section Header - Mysterious fade -->
+		<!-- Section Header -->
 		<div class="text-center mb-20">
 			<span 
 				class="text-xs uppercase tracking-[0.2em] text-gold-500 mb-4 block"
@@ -58,11 +85,11 @@
 			</p>
 		</div>
 
-		<!-- Timeline - Timeline fade -->
+		<!-- 3D Timeline -->
 		<div class="relative max-w-4xl mx-auto">
-			<!-- Vertical line -->
-			<div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-espresso-200 dark:bg-espresso-700 transform -translate-x-1/2"></div>
-			<div class="md:hidden absolute left-6 top-0 bottom-0 w-px bg-espresso-200 dark:bg-espresso-700"></div>
+			<!-- Vertical line with glow -->
+			<div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-gold-500/30 to-transparent transform -translate-x-1/2"></div>
+			<div class="md:hidden absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-gold-500/30 to-transparent"></div>
 
 			<div class="space-y-12">
 				{#each experience as exp, index}
@@ -70,15 +97,21 @@
 						class="relative flex flex-col md:flex-row experience-item"
 						use:scrollDirectionAnimate={{ type: 'timeline-fade', delay: 800 + index * 200, duration: 800, index: index }}
 					>
-						<!-- Timeline dot with pulse -->
-						<div class="absolute left-6 md:left-1/2 w-3 h-3 rounded-full transform -translate-x-1/2 mt-6 ring-4 ring-cream-100 dark:ring-espresso-900 z-10 {getTypeColor(exp.type)}"></div>
+						<!-- 3D Timeline dot -->
+						<div class="absolute left-6 md:left-1/2 w-4 h-4 rounded-full transform -translate-x-1/2 mt-5.5 ring-8 ring-cream-100 dark:ring-espresso-900 z-10 bg-gradient-to-br {getTypeColor(exp.type)} shadow-lg"></div>
 						
-						<!-- Card -->
-						<div class="md:w-1/2 pl-14 md:pl-0 {index % 2 === 0 ? 'md:pr-12' : 'md:ml-auto md:pl-12'}">
-							<Card class="bg-card/70 border-border transition-all duration-300 hover:shadow-elevated">
+						<!-- 3D Card -->
+						<div 
+							class="md:w-1/2 pl-14 md:pl-0 {index % 2 === 0 ? 'md:pr-12' : 'md:ml-auto md:pl-12'}"
+							bind:this={cardRefs[index]}
+							onmousemove={(e) => handleMouseMove(e, index)}
+							onmouseleave={() => handleMouseLeave(index)}
+							role="article"
+						>
+							<Card class="bg-card/80 border-border transition-all duration-300 hover:border-gold-500/30 cursor-pointer" style="transform-style: preserve-3d; transition: transform 0.3s ease;">
 								<CardHeader>
 									<div class="flex items-start gap-3 {index % 2 === 0 ? 'md:flex-row-reverse md:text-right' : ''}">
-										<div class="p-2.5 rounded-sm {getTypeColor(exp.type)} flex-shrink-0">
+										<div class="p-2.5 rounded-sm bg-gradient-to-br {getTypeColor(exp.type)} shadow-lg">
 											<svelte:component this={getTypeIcon(exp.type)} class="w-4 h-4 text-white" />
 										</div>
 										<div class="flex-1">
