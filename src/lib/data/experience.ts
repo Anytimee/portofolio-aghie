@@ -1,15 +1,12 @@
 /**
- * Experience data for SMA/High School student portfolio
+ * Experience data for Full Stack Developer portfolio
  * 
  * Type categories:
- * - education: Formal schooling (SMA, kursus, dll)
- * - project: Personal or school projects
- * - extracurricular: Club activities, organizations
+ * - education: Formal schooling
+ * - project: Personal or professional projects
  * - internship: Internship or work experience
- * - competition: Competitions, competitions, olympiads
- * 
- * Edit the content below to personalize your portfolio!
- * Look for [placeholders] - replace them with your actual information
+ * - certification: Certifications and courses
+ * - competition: Competitions, olympiads
  */
 
 export const experience = [
@@ -17,26 +14,24 @@ export const experience = [
     id: 1,
     type: "education",
     work: "SMA 2 Pandeglang",
-    role: "Siswa",
+    role: "Student",
     period: "2023 - 2026",
-    description: "A Social Studies major with active participation in both academic and extracurricular activities."
+    description: "Social Studies major with a passion for technology and web development."
   },
   {
     id: 2,
     type: "project",
-    title: "Anime Streaming, Movie Platform & Gallery",
     role: "Full-stack Developer",
     period: "2024 - 2025",
-    description: "Developed multiple hobby-based projects including an anime streaming site, movie platform, and image gallery. Built using Laravel, Bootstrap, and TailwindCSS to strengthen back-end and front-end development skills."
+    description: "Developed an anime streaming and gallery website using Laravel, HTML, Node.js, and TailwindCSS."
   },
   {
     id: 3,
     type: "project",
-    title: "E-commerce & Coffee Shop Website",
     role: "Full-stack Developer",
-    period: "2026",
-    description: "Completed two full-stack projects within two weeks: an E-commerce platform and a Coffee shop website. Built with React.js, Node.js, and TailwindCSS, utilizing AI-assisted development to accelerate workflow and implement modern UI/UX patterns."
-  }
+    period: "2025",
+    description: "Developed a beautiful e-commerce and coffee shop website with React, tailwindCSS nodejs and postgreSQL."
+  },
 ];
 
 /**
@@ -46,8 +41,8 @@ export function getTypeIcon(type: string): string {
   const icons: Record<string, string> = {
     education: "graduation-cap",
     project: "code",
-    extracurricular: "users",
     internship: "briefcase",
+    certification: "award",
     competition: "trophy"
   };
   return icons[type] || "briefcase";
@@ -58,11 +53,11 @@ export function getTypeIcon(type: string): string {
  */
 export function getTypeLabel(type: string): string {
   const labels: Record<string, string> = {
-    education: "Pendidikan",
-    project: "Proyek",
-    extracurricular: "Ekstrakurikuler",
-    internship: "Magang",
-    competition: "Kompetisi"
+    education: "Education",
+    project: "Projects",
+    internship: "Internship",
+    certification: "Certification",
+    competition: "Competition"
   };
-  return labels[type] || "Pengalaman";
+  return labels[type] || "Experience";
 }

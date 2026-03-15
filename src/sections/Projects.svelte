@@ -1,49 +1,60 @@
 <script lang="ts">
 	import { projects } from "$lib/data";
-	import { Card, CardContent, CardFooter, CardHeader } from "$lib/components/ui";
 	import { Badge } from "$lib/components/ui";
-	import { Button } from "$lib/components/ui";
-	import { ExternalLink, Github, ArrowUpRight } from "lucide-svelte";
+	import { ExternalLink, Github, ChevronLeft, ChevronRight, X } from "lucide-svelte";
 	import { scrollDirectionAnimate } from "$lib/utils/animation";
+	import { onMount } from "svelte";
+	import { fade, slide } from "svelte/transition";
 
-	const projectsList = [
-		{
-			id: 1,
-			title: "E-Commerce Platform",
-			description: "A full-featured e-commerce platform with product management, admin dashboard, role management, real-time analytics, security CSP and captcha.",
-			image: "/src/assets/project/project1.png",
-			technologies: ["React", "TailwindCSS", "Supabase"],
-			demoUrl: "https://storeia.my.id",
-			githubUrl: "https://github.com/user/repo"
-		},
-		{
-			id: 2,
-			title: "Coffee Shop",
-			description: "A full-featured e-commerce coffee shop with notification, product management, admin dashboard, role management, and payment integration.",
-			image: "/src/assets/project/project2.png",
-			technologies: ["React", "Node.js", "TailwindCSS", "Supabase"],
-			demoUrl: "https://ruang-indah.vercel.app/",
-			githubUrl: "https://github.com/user/repo"
-		},
-		{
-			id: 3,
-			title: "Weather Dashboard",
-			description: "An interactive weather dashboard with forecasts, maps, and location-based alerts.",
-			image: "/src/assets/project/project1.png",
-			technologies: ["Vue.js", "Python", "OpenWeather API"],
-			demoUrl: "https://demo.com",
-			githubUrl: "https://github.com/user/repo"
-		},
-		{
-			id: 4,
-			title: "Portfolio Generator",
-			description: "A static site generator for creating beautiful portfolios with customizable themes.",
-			image: "/src/assets/project/project2.png",
-			technologies: ["SvelteKit", "Markdown", "TailwindCSS"],
-			demoUrl: "https://demo.com",
-			githubUrl: "https://github.com/user/repo"
+	let selectedProject = $state<number | null>(null);
+	let currentIndex = $state(0);
+	let isMobile = $state(false);
+
+	function checkMobile() {
+		isMobile = window.innerWidth < 768;
+	}
+
+	onMount(() => {
+		checkMobile();
+		window.addEventListener('resize', checkMobile);
+		return () => window.removeEventListener('resize', checkMobile);
+	});
+
+	function selectProject(id: number) {
+		currentIndex = projects.findIndex(p => p.id === id);
+		selectedProject = id;
+	}
+
+	function nextProject() {
+		currentIndex = (currentIndex + 1) % projects.length;
+		selectedProject = projects[currentIndex].id;
+	}
+
+	function prevProject() {
+		currentIndex = (currentIndex - 1 + projects.length) % projects.length;
+		selectedProject = projects[currentIndex].id;
+	}
+
+	function closePreview() {
+		selectedProject = null;
+	}
+
+	function handleKeydown(event: KeyboardEvent) {
+		if (event.key === 'Escape' && selectedProject) {
+			closePreview();
+		} else if (event.key === 'ArrowRight' && selectedProject) {
+			nextProject();
+		} else if (event.key === 'ArrowLeft' && selectedProject) {
+			prevProject();
 		}
-	];
+	}
+
+	onMount(() => {
+		window.addEventListener('keydown', handleKeydown);
+		return () => window.removeEventListener('keydown', handleKeydown);
+	});
+
+	const projectTitles = ["Storeia", "Ruang Indah", "Portfolio", "Weather"];
 </script>
 
 <section 
@@ -52,13 +63,11 @@
 >
 	<!-- Background -->
 	<div class="absolute inset-0 bg-dots opacity-30"></div>
-
-	<!-- Mysterious gradient overlay -->
 	<div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-background/50 via-transparent to-background/50"></div>
 
-	<div class="container mx-auto px-6 relative z-10">
-		<!-- Section Header - Mysterious fade -->
-		<div class="text-center mb-20">
+	<div class="container mx-auto px-4 relative z-10">
+		<!-- Section Header -->
+		<div class="text-center mb-12">
 			<span 
 				class="text-xs uppercase tracking-[0.2em] text-gold-500 mb-4 block"
 				use:scrollDirectionAnimate={{ type: 'mysterious-fade', delay: 200, duration: 800 }}
@@ -67,102 +76,287 @@
 				class="text-display"
 				use:scrollDirectionAnimate={{ type: 'shadow-reveal', delay: 400, duration: 800 }}
 			>Projects</h2>
-			<p 
-				class="text-muted-foreground text-lg max-w-2xl mx-auto mt-6"
-				use:scrollDirectionAnimate={{ type: 'mysterious-fade', delay: 600, duration: 800 }}
-			>
-				A selection of projects I have worked on
-			</p>
 		</div>
 
-		<!-- Projects Grid - Stagger reveal with blur -->
-		<div class="grid md:grid-cols-2 gap-8 lg:gap-10 max-w-5xl mx-auto">
-			{#each projectsList as project, index}
-				<div 
-					class="project-card"
-					use:scrollDirectionAnimate={{ type: 'stagger-reveal', delay: 800 + index * 200, duration: 800, index: index }}
-				>
-					<Card class="h-full bg-card/70 border-border overflow-hidden group transition-all duration-500 hover:shadow-elevated">
-						<!-- Image -->
-						<div class="relative h-56 overflow-hidden">
+		<!-- Project Selection Grid (when no project selected) -->
+		{#if selectedProject === null}
+			<div 
+				class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-7xl mx-auto"
+				use:scrollDirectionAnimate={{ type: 'stagger-reveal', delay: 600, duration: 800 }}
+			>
+				{#each projects as project, index}
+					<button
+						class="project-thumb"
+						onclick={() => selectProject(project.id)}
+					>
+						<div class="thumb-inner">
 							<img 
-								src={project.image} 
+								src={project.image || "/src/assets/project/project1.png"} 
 								alt={project.title}
-								class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+								class="thumb-img"
 								loading="lazy"
 							/>
-							<div class="absolute inset-0 bg-gradient-to-t from-espresso-900/30 to-transparent"></div>
-							
-							<!-- Links -->
-							<div class="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-								<button
-									onclick={() => window.open(project.demoUrl, '_blank')}
-									class="p-2.5 rounded-sm bg-card/90 hover:bg-card text-espresso-800 dark:text-cream-100 transition-colors"
-									aria-label="View demo"
-								>
-									<ExternalLink class="w-4 h-4" />
-								</button>
-								<button
-									onclick={() => window.open(project.githubUrl, '_blank')}
-									class="p-2.5 rounded-sm bg-card/90 hover:bg-card text-espresso-800 dark:text-cream-100 transition-colors"
-									aria-label="View GitHub"
-								>
-									<Github class="w-4 h-4" />
-								</button>
+							<div class="thumb-overlay">
+								<span class="thumb-title">{projectTitles[index]}</span>
 							</div>
 						</div>
+					</button>
+				{/each}
+			</div>
+		{:else}
+			<!-- Single TV/Monitor Display -->
+			<div class="flex flex-col items-center" transition:fade={{ duration: 200 }}>
+				<!-- Close Button -->
+				<button class="close-btn" onclick={closePreview}>
+					<X class="w-5 h-5" />
+				</button>
+
+				<!-- TV/Monitor Frame -->
+				<div class="tv-frame" class:mobile={isMobile}>
+					<!-- TV Screen -->
+					<div class="tv-screen">
+						<iframe 
+							src={projects[currentIndex]?.demoUrl}
+							title={projects[currentIndex]?.title}
+							class="tv-iframe"
+							sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+						></iframe>
+					</div>
+					
+					<!-- TV Stand -->
+					<div class="tv-stand"></div>
+				</div>
+
+				<!-- Project Info & Navigation -->
+				<div class="project-info">
+					<div class="flex items-center justify-between w-full">
+						<button class="nav-btn" onclick={prevProject}>
+							<ChevronLeft class="w-5 h-5" />
+						</button>
 						
-						<!-- Content -->
-						<CardHeader>
-							<h3 class="text-xl font-medium text-espresso-800 dark:text-cream-100 flex items-center gap-2 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors duration-300">
-								{project.title}
-								<ArrowUpRight class="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+						<div class="text-center">
+							<h3 class="text-lg font-semibold text-espresso-800 dark:text-cream-100">
+								{projectTitles[currentIndex]}
 							</h3>
-						</CardHeader>
-						
-						<CardContent>
-							<p class="text-muted-foreground text-sm mb-5 leading-relaxed">
-								{project.description}
-							</p>
-							
-							<div class="flex flex-wrap gap-2">
-								{#each project.technologies as tech}
-									<Badge variant="secondary" class="bg-espresso-100 dark:bg-espresso-800 text-espresso-700 dark:text-cream-200 rounded-sm text-xs">
+							<div class="flex gap-2 justify-center mt-2 flex-wrap">
+								{#each projects[currentIndex]?.technologies || [] as tech}
+									<Badge variant="secondary" class="text-xs">
 										{tech}
 									</Badge>
 								{/each}
 							</div>
-						</CardContent>
+						</div>
 						
-						<CardFooter class="gap-3 pt-2">
-							<Button 
-								variant="default" 
-								size="sm"
-								class="rounded-sm font-medium bg-espresso-800 hover:bg-espresso-700 dark:bg-gold-500 dark:hover:bg-gold-400 dark:text-espresso-900 border-0 transition-all duration-300"
-								onclick={() => window.open(project.demoUrl, '_blank')}
-							>
-								<ExternalLink class="w-4 h-4 mr-2" />
-								Live Demo
-							</Button>
-							<Button 
-								variant="outline" 
-								size="sm"
-								class="rounded-sm border-espresso-300 dark:border-espresso-600 hover:bg-espresso-100 dark:hover:bg-espresso-800/50 transition-all duration-300"
-								onclick={() => window.open(project.githubUrl, '_blank')}
-							>
-								<Github class="w-4 h-4 mr-2" />
-								Source
-							</Button>
-						</CardFooter>
-					</Card>
+						<button class="nav-btn" onclick={nextProject}>
+							<ChevronRight class="w-5 h-5" />
+						</button>
+					</div>
+
+					<!-- External Links -->
+					<div class="flex gap-3 mt-4">
+						<a 
+							href={projects[currentIndex]?.demoUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="external-link-btn"
+						>
+							<ExternalLink class="w-4 h-4" />
+							<span>Visit Website</span>
+						</a>
+						<a 
+							href={projects[currentIndex]?.githubUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="external-link-btn"
+						>
+							<Github class="w-4 h-4" />
+							<span>Source Code</span>
+						</a>
+					</div>
 				</div>
-			{/each}
-		</div>
+			</div>
+		{/if}
 	</div>
 </section>
 
 <style>
-	.project-card {
-		will-change: opacity, filter, transform;
+	/* Project Thumbnails */
+	.project-thumb {
+		border: none;
+		background: transparent;
+		padding: 0;
+		cursor: pointer;
+		transition: transform 0.3s ease;
+	}
+
+	.project-thumb:hover {
+		transform: scale(1.05);
+	}
+
+	.thumb-inner {
+		position: relative;
+		border-radius: 24px;
+		overflow: hidden;
+		aspect-ratio: 16/9;
+		box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+		width: 100%;
+		min-height: 200px;
+	}
+
+	@media (min-width: 768px) {
+		.thumb-inner {
+			height: 350px;
+		}
+	}
+
+	.thumb-img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.thumb-overlay {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		padding: 16px;
+		background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+	}
+
+	.thumb-title {
+		color: #fff;
+		font-weight: 600;
+		font-size: 18px;
+	}
+
+	/* Close Button */
+	.close-btn {
+		width: 40px;
+		height: 40px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: rgba(0,0,0,0.5);
+		border: none;
+		border-radius: 50%;
+		color: #fff;
+		cursor: pointer;
+		margin-bottom: 16px;
+		transition: all 0.2s;
+	}
+
+	.close-btn:hover {
+		background: rgba(0,0,0,0.7);
+		transform: scale(1.1);
+	}
+
+	/* TV Frame */
+	.tv-frame {
+		width: 100%;
+		max-width: 90vw;
+		max-height: 80vh;
+		aspect-ratio: 16/9;
+		background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+		border-radius: 24px;
+		padding: 20px;
+		box-shadow: 
+			0 0 0 3px rgba(255,255,255,0.15),
+			0 0 0 8px rgba(0,0,0,0.3),
+			0 40px 100px rgba(0,0,0,0.7);
+	}
+
+	.tv-frame.mobile {
+		max-width: 320px;
+		aspect-ratio: 9/19;
+		border-radius: 32px;
+		padding: 8px;
+	}
+
+	.tv-screen {
+		width: 100%;
+		height: 100%;
+		background: #000;
+		border-radius: 8px;
+		overflow: hidden;
+	}
+
+	.tv-frame.mobile .tv-screen {
+		border-radius: 24px;
+	}
+
+	.tv-iframe {
+		width: 100%;
+		height: 100%;
+		border: none;
+		background: #fff;
+	}
+
+	/* TV Stand */
+	.tv-stand {
+		width: 120px;
+		height: 8px;
+		background: linear-gradient(180deg, #333 0%, #222 100%);
+		border-radius: 0 0 4px 4px;
+		margin: 0 auto;
+	}
+
+	.tv-frame.mobile .tv-stand {
+		display: none;
+	}
+
+	/* Project Info */
+	.project-info {
+		margin-top: 20px;
+		width: 100%;
+		max-width: 500px;
+	}
+
+	.nav-btn {
+		width: 40px;
+		height: 40px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: rgba(212, 175, 55, 0.2);
+		border: 1px solid rgba(212, 175, 55, 0.3);
+		border-radius: 50%;
+		color: #d4af37;
+		cursor: pointer;
+		transition: all 0.2s;
+	}
+
+	.nav-btn:hover {
+		background: rgba(212, 175, 55, 0.3);
+		transform: scale(1.1);
+	}
+
+	.external-link-btn {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		padding: 10px 20px;
+		background: #d4af37;
+		color: #000;
+		border-radius: 8px;
+		font-weight: 600;
+		font-size: 14px;
+		transition: all 0.2s;
+	}
+
+	.external-link-btn:hover {
+		background: #e5c158;
+		transform: translateY(-2px);
+	}
+
+	@media (max-width: 768px) {
+		.project-info {
+			padding: 0 20px;
+		}
+		
+		.external-link-btn {
+			padding: 8px 16px;
+			font-size: 13px;
+		}
 	}
 </style>

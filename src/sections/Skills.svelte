@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { skills } from "$lib/data";
 	import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "$lib/components/ui";
-	import { Code2, Server, Wrench } from "lucide-svelte";
+	import { Code2, Server, Database, Wrench } from "lucide-svelte";
 	import { scrollDirectionAnimate } from "$lib/utils/animation";
 
 	const iconMap: Record<string, any> = {
 		Code2,
 		Server,
+		Database,
 		Wrench
 	};
 
@@ -26,10 +27,17 @@
 			icon: Server
 		},
 		{
-			title: "Tools",
-			description: "Modern development tools",
-			skills: skills.tools,
+			title: "Languages",
+			description: "Programming languages I use",
+			skills: skills.languages,
 			delay: 400,
+			icon: Database
+		},
+		{
+			title: "Tools",
+			description: "Development & deployment tools",
+			skills: skills.tools,
+			delay: 600,
 			icon: Wrench
 		}
 	];
@@ -66,7 +74,7 @@
 		</div>
 
 		<!-- Skills Grid - Stagger reveal -->
-		<div class="grid md:grid-cols-3 gap-8 lg:gap-10 max-w-5xl mx-auto">
+		<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-5xl mx-auto">
 			{#each categories as category, index}
 				<div 
 					class="h-full"

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Button } from "$lib/components/ui";
 	import { profile, socials } from "$lib/data";
-	import { Github, Linkedin, Twitter, Mail, ArrowRight, ChevronDown } from "lucide-svelte";
+	import { Github, Linkedin, Twitter, Mail, ArrowRight, ChevronDown, Code } from "lucide-svelte";
 	import { onMount } from "svelte";
 
 	let mounted = $state(false);
@@ -57,7 +57,8 @@
 	};
 
 	const startTypingAnimation = () => {
-		const fullName = "Aghie Faezya";
+		// Extract first name from full name
+		const fullName = profile.name.split(' ').slice(0, 2).join(' ');
 		let currentIndex = 0;
 		const charDuration = 100;
 
@@ -85,7 +86,8 @@
 		github: Github,
 		linkedin: Linkedin,
 		twitter: Twitter,
-		mail: Mail
+		mail: Mail,
+		code: Code
 	};
 </script>
 

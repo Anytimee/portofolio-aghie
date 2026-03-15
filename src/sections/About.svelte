@@ -2,19 +2,158 @@
 	import { profile } from "$lib/data";
 	import { MapPin, ArrowRight } from "lucide-svelte";
 	import { scrollDirectionAnimate } from "$lib/utils/animation";
+	import { onMount } from "svelte";
+	import * as THREE from "three";
 
-	let imageLoaded = $state(false);
+	let canvasContainer: HTMLDivElement;
+	let mouseX = $state(0);
+	let mouseY = $state(0);
 
 	const journey = [
-		{ year: "Beginning", description: "Started my journey with curiosity and a passion for building things" },
-		{ year: "Learning", description: "Mastered core concepts and built first projects" },
-		{ year: "Growing", description: "Worked with amazing teams and delivered real-world solutions" },
-		{ year: "Now", description: "Creating impactful digital experiences every day" }
+		{ year: "Beginning", description: "Started learning web development and fell in love with React" },
+		{ year: "Learning", description: "Mastered Svelte, React, and modern frontend tools" },
+		{ year: "Growing", description: "Built real-world projects with Node.js and databases" },
+		{ year: "Now", description: "Creating beautiful web experiences with React & Svelte" }
 	];
 
-	function handleImageLoad() {
-		imageLoaded = true;
-	}
+	onMount(() => {
+		// Scene setup
+		const scene = new THREE.Scene();
+		
+		// Camera
+		const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
+		camera.position.z = 5;
+		
+		// Renderer
+		const renderer = new THREE.WebGLRenderer({ 
+			alpha: true, 
+			antialias: true 
+		});
+		renderer.setSize(300, 300);
+		renderer.setPixelRatio(window.devicePixelRatio);
+		canvasContainer.appendChild(renderer.domElement);
+		
+		// Load avatar texture
+		const textureLoader = new THREE.TextureLoader();
+		textureLoader.load(
+			'/src/assets/avatar/avatar.jpg',
+			(texture) => {
+				// Create photo frame geometry
+				const frameGeometry = new THREE.BoxGeometry(2.4, 3, 0.15);
+				
+				// Create materials for each face
+				const frameMaterial = new THREE.MeshStandardMaterial({
+					color: 0x1a1a2e,
+					metalness: 0.3,
+					roughness: 0.7
+				});
+				
+				// Photo material
+				const photoMaterial = new THREE.MeshBasicMaterial({
+					map: texture
+				});
+				
+				// Create materials array for each face
+				const materials = [
+					frameMaterial, // right
+					frameMaterial, // left
+					frameMaterial, // top
+					frameMaterial, // bottom
+					photoMaterial, // front
+					frameMaterial  // back
+				];
+				
+				const frame = new THREE.Mesh(frameGeometry, materials);
+				scene.add(frame);
+				
+				// Add glow effect
+				const glowGeometry = new THREE.BoxGeometry(2.6, 3.2, 0.1);
+				const glowMaterial = new THREE.MeshBasicMaterial({
+					color: 0xd4af37,
+					transparent: true,
+					opacity: 0.15
+				});
+				const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+				glow.position.z = -0.1;
+				scene.add(glow);
+				
+				// Animation
+				let targetRotationX = 0;
+				let targetRotationY = 0;
+				
+				const animate = () => {
+					requestAnimationFrame(animate);
+					
+					// Smooth rotation based on mouse
+					targetRotationY = mouseX * 0.3;
+					targetRotationX = mouseY * 0.3;
+					
+					frame.rotation.y += (targetRotationY - frame.rotation.y) * 0.05;
+					frame.rotation.x += (targetRotationX - frame.rotation.x) * 0.05;
+					
+					// Gentle floating animation
+					frame.position.y = Math.sin(Date.now() * 0.001) * 0.1;
+					
+					glow.rotation.y = frame.rotation.y;
+					glow.rotation.x = frame.rotation.x;
+					glow.position.y = frame.position.y;
+					
+					renderer.render(scene, camera);
+				};
+				
+				animate();
+			},
+			undefined,
+			(err) => {
+				console.error('Error loading texture:', err);
+				// Fallback: create a simple colored frame
+				const geometry = new THREE.BoxGeometry(2.4, 3, 0.15);
+				const material = new THREE.MeshStandardMaterial({
+					color: 0xd4af37,
+					metalness: 0.5,
+					roughness: 0.5
+				});
+				const cube = new THREE.Mesh(geometry, material);
+				scene.add(cube);
+				
+				const animate = () => {
+					requestAnimationFrame(animate);
+					cube.rotation.y = mouseX * 0.3;
+					cube.rotation.x = mouseY * 0.3;
+					cube.position.y = Math.sin(Date.now() * 0.001) * 0.1;
+					renderer.render(scene, camera);
+				};
+				animate();
+			}
+		);
+		
+		// Lighting
+		const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+		scene.add(ambientLight);
+		
+		const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+		directionalLight.position.set(5, 5, 5);
+		scene.add(directionalLight);
+		
+		const pointLight = new THREE.PointLight(0xd4af37, 0.5);
+		pointLight.position.set(-3, 2, 4);
+		scene.add(pointLight);
+		
+		// Mouse move handler
+		const handleMouseMove = (event: MouseEvent) => {
+			const rect = canvasContainer.getBoundingClientRect();
+			mouseX = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+			mouseY = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+		};
+		
+		canvasContainer.addEventListener('mousemove', handleMouseMove);
+		
+		// Cleanup
+		return () => {
+			canvasContainer.removeEventListener('mousemove', handleMouseMove);
+			renderer.dispose();
+		};
+	});
 </script>
 
 <section id="about" class="py-24 md:py-32 relative overflow-hidden">
@@ -39,24 +178,27 @@
 			</div>
 
 			<div class="grid md:grid-cols-2 gap-16 lg:gap-20 items-center">
-				<!-- Image - Shadow reveal from darkness -->
+				<!-- 3D Avatar - Shadow reveal from darkness -->
 				<div 
 					class="about-image-container"
 					use:scrollDirectionAnimate={{ type: 'shadow-reveal', delay: 600, duration: 800 }}
 				>
-					<div class="relative">
-						<div class="w-64 h-64 md:w-80 md:h-80 mx-auto rounded-sm overflow-hidden shadow-elevated bg-cream-200 dark:bg-espresso-800">
-							<img 
-								src="/src/assets/avatar/avatar.jpg" 
-								alt={profile.name} 
-								class="w-full h-full object-cover transition-opacity duration-700 {imageLoaded ? 'opacity-100' : 'opacity-0'}"
-								onload={handleImageLoad}
-							/>
-						</div>
-						<div class="absolute -inset-3 border border-espresso-200 dark:border-espresso-700 rounded-sm -z-10"></div>
-						<div class="absolute -bottom-5 -right-5 p-5 bg-card rounded-sm shadow-elevated border border-border">
+					<div class="relative flex justify-center">
+						<!-- 3D Canvas Container -->
+						<div 
+							bind:this={canvasContainer}
+							class="w-64 h-80 md:w-72 md:h-90 cursor-pointer"
+							style="perspective: 1000px;"
+						></div>
+						
+						<!-- Role Badge -->
+						<div class="absolute -bottom-3 -right-2 md:-right-4 p-4 bg-card rounded-sm shadow-elevated border border-border">
 							<span class="text-sm font-medium text-gold-500">{profile.role}</span>
 						</div>
+						
+						<!-- Floating decorations -->
+						<div class="absolute -top-4 -left-4 w-8 h-8 rounded-full bg-gold-500/20 animate-pulse"></div>
+						<div class="absolute top-1/2 -left-8 w-4 h-4 rounded-full bg-gold-500/30 animate-pulse" style="animation-delay: 0.5s;"></div>
 					</div>
 				</div>
 
@@ -75,7 +217,7 @@
 					</p>
 
 					<p class="text-muted-foreground leading-relaxed mb-10">
-						I believe in the power of technology to transform ideas into reality. 
+						I believe in the power of React and Svelte to transform ideas into reality. 
 						Every line of code is an opportunity to create something meaningful.
 					</p>
 
@@ -120,5 +262,9 @@
 	}
 	.journey-item {
 		will-change: opacity, filter, transform;
+	}
+	
+	:global(canvas) {
+		border-radius: 8px;
 	}
 </style>
