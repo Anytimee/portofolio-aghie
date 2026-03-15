@@ -4,6 +4,6 @@ export const profile = {
   tagline: "Building modern web experiences with React & Svelte",
   email: "aghiefaezyp@gmail.com",
   location: "Pandeglang, Indonesia",
-  avatar: "/src/assets/avatar/avatar.jpg",
+  avatar: "/avatar.jpg",
   bio: "A passionate Full Stack Developer who loves building modern web applications with React and Svelte. I enjoy creating beautiful, interactive user interfaces and robust backend systems."
 };
