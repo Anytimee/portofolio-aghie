@@ -62,7 +62,7 @@
 					photoMaterial, // front
 					frameMaterial  // back
 				];
-				
+
 				const frame = new THREE.Mesh(frameGeometry, materials);
 				scene.add(frame);
 				
@@ -156,28 +156,28 @@
 	});
 </script>
 
-<section id="about" class="py-24 md:py-32 relative overflow-hidden">
+<section id="about" class="py-12 md:py-16 relative overflow-hidden">
 	<!-- Subtle background -->
 	<div class="absolute inset-0 bg-dots opacity-30"></div>
 
 	<!-- Mysterious shadow overlay for reveal effect -->
 	<div class="absolute inset-0 pointer-events-none bg-gradient-to-r from-transparent via-background/20 to-transparent"></div>
 
-	<div class="container mx-auto px-6 relative z-10">
-		<div class="max-w-5xl mx-auto">
+	<div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+		<div class="max-w-6xl mx-auto">
 			<!-- Section Header - Mysterious fade -->
-			<div class="text-center mb-20">
+			<div class="text-center mb-12">
 				<span 
 					class="text-xs uppercase tracking-[0.2em] text-gold-500 mb-4 block"
 					use:scrollDirectionAnimate={{ type: 'mysterious-fade', delay: 200, duration: 800 }}
 				>Get to know me</span>
 				<h2 
-					class="text-display"
+					class="text-3xl md:text-4xl font-bold text-espresso-800 dark:text-cream-100 mb-4"
 					use:scrollDirectionAnimate={{ type: 'shadow-reveal', delay: 400, duration: 800 }}
 				>About Me</h2>
 			</div>
 
-			<div class="grid md:grid-cols-2 gap-16 lg:gap-20 items-center">
+			<div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
 				<!-- 3D Avatar - Shadow reveal from darkness -->
 				<div 
 					class="about-image-container"
@@ -204,30 +204,30 @@
 
 				<!-- Content - Mysterious fade with blur -->
 				<div 
-					class="about-content"
+					class="about-content space-y-6"
 					use:scrollDirectionAnimate={{ type: 'mysterious-fade', delay: 900, duration: 800 }}
 				>
-					<div class="flex items-center gap-2 text-muted-foreground mb-6">
+					<div class="flex items-center gap-2 text-muted-foreground">
 						<MapPin class="w-4 h-4" />
 						<span class="text-sm">{profile.location}</span>
 					</div>
 
-					<p class="text-lg md:text-xl leading-relaxed text-espresso-800 dark:text-cream-100 mb-6">
+					<p class="text-lg md:text-xl leading-relaxed text-espresso-800 dark:text-cream-100">
 						{profile.bio}
 					</p>
 
-					<p class="text-muted-foreground leading-relaxed mb-10">
+					<p class="text-muted-foreground leading-relaxed">
 						I believe in the power of React and Svelte to transform ideas into reality. 
 						Every line of code is an opportunity to create something meaningful.
 					</p>
 
 					<!-- Journey - Stagger reveal -->
 					<div class="pt-2">
-						<h3 class="text-lg font-medium mb-6 flex items-center gap-2 text-espresso-800 dark:text-cream-100">
+						<h3 class="text-lg font-medium flex items-center gap-2 text-espresso-800 dark:text-cream-100 mb-4">
 							<span>My Journey</span>
 							<ArrowRight class="w-4 h-4 text-gold-500" />
 						</h3>
-						<div class="space-y-5">
+						<div class="space-y-4">
 							{#each journey as item, index}
 								<div 
 									class="flex gap-4 items-start journey-item"

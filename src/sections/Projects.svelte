@@ -59,135 +59,140 @@
 
 <section 
 	id="projects" 
-	class="py-24 md:py-32 relative overflow-hidden"
+	class="py-12 md:py-16 relative overflow-hidden"
 >
 	<!-- Background -->
 	<div class="absolute inset-0 bg-dots opacity-30"></div>
 	<div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-background/50 via-transparent to-background/50"></div>
 
-	<div class="container mx-auto px-4 relative z-10">
-		<!-- Section Header -->
-		<div class="text-center mb-12">
-			<span 
-				class="text-xs uppercase tracking-[0.2em] text-gold-500 mb-4 block"
-				use:scrollDirectionAnimate={{ type: 'mysterious-fade', delay: 200, duration: 800 }}
-			>My work</span>
-			<h2 
-				class="text-display"
-				use:scrollDirectionAnimate={{ type: 'shadow-reveal', delay: 400, duration: 800 }}
-			>Projects</h2>
-		</div>
+	<div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+		<div class="max-w-6xl mx-auto">
+			<!-- Section Header -->
+			<div class="text-center mb-12">
+				<span 
+					class="text-xs uppercase tracking-[0.2em] text-gold-500 mb-4 block"
+					use:scrollDirectionAnimate={{ type: 'mysterious-fade', delay: 200, duration: 800 }}
+				>My work</span>
+				<h2 
+					class="text-3xl md:text-4xl font-bold text-espresso-800 dark:text-cream-100 mb-4"
+					use:scrollDirectionAnimate={{ type: 'shadow-reveal', delay: 400, duration: 800 }}
+				>Projects</h2>
+			</div>
 
-		<!-- Project Selection Grid (when no project selected) -->
-		{#if selectedProject === null}
-			<div 
-				class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-7xl mx-auto"
-				use:scrollDirectionAnimate={{ type: 'stagger-reveal', delay: 600, duration: 800 }}
-			>
-				{#each projects as project, index}
-					<button
-						class="project-thumb"
-						onclick={() => selectProject(project.id)}
-					>
-						<!-- Monitor/TV Frame -->
-						<div class="monitor-frame">
-							<!-- Monitor Screen -->
-							<div class="monitor-screen">
-								<img 
-									src={project.image || "/project1.png"} 
-									alt={project.title}
-									class="monitor-img"
-									loading="lazy"
-								/>
-								<div class="monitor-overlay">
-									<span class="monitor-title">{projectTitles[index]}</span>
+			<!-- Project Selection Grid (when no project selected) -->
+			{#if selectedProject === null}
+				<div 
+					class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
+					use:scrollDirectionAnimate={{ type: 'stagger-reveal', delay: 600, duration: 800 }}
+				>
+					{#each projects as project, index}
+						<button
+							class="project-thumb"
+							onclick={() => selectProject(project.id)}
+						>
+							<!-- Card -->
+							<div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
+								<!-- Monitor/TV Frame -->
+								<div class="monitor-frame">
+									<!-- Monitor Screen -->
+									<div class="monitor-screen">
+										<img 
+											src={project.image || "/project1.png"} 
+											alt={project.title}
+											class="monitor-img"
+											loading="lazy"
+										/>
+										<div class="monitor-overlay">
+											<span class="monitor-title">{projectTitles[index]}</span>
+										</div>
+									</div>
+									<!-- Monitor Stand -->
+									<div class="monitor-stand">
+										<div class="monitor-base"></div>
+									</div>
+								</div>
+								<!-- Project Label -->
+								<div class="project-label mt-4">
+									<span class="text-xs uppercase tracking-[0.2em] text-gold-500">Click to preview</span>
 								</div>
 							</div>
-							<!-- Monitor Stand -->
-							<div class="monitor-stand">
-								<div class="monitor-base"></div>
-							</div>
-						</div>
-						<!-- Project Label -->
-						<div class="project-label">
-							<span class="text-xs uppercase tracking-[0.2em] text-gold-500">Click to preview</span>
-						</div>
+						</button>
+					{/each}
+				</div>
+			{:else}
+				<!-- Single TV/Monitor Display -->
+				<div class="flex flex-col items-center" transition:fade={{ duration: 200 }}>
+					<!-- Close Button -->
+					<button class="close-btn" onclick={closePreview}>
+						<X class="w-5 h-5" />
 					</button>
-				{/each}
-			</div>
-		{:else}
-			<!-- Single TV/Monitor Display -->
-			<div class="flex flex-col items-center" transition:fade={{ duration: 200 }}>
-				<!-- Close Button -->
-				<button class="close-btn" onclick={closePreview}>
-					<X class="w-5 h-5" />
-				</button>
 
-				<!-- TV/Monitor Frame -->
-				<div class="tv-frame" class:mobile={isMobile}>
-					<!-- TV Screen -->
-					<div class="tv-screen">
-						<iframe 
-							src={projects[currentIndex]?.demoUrl}
-							title={projects[currentIndex]?.title}
-							class="tv-iframe"
-							sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-						></iframe>
-					</div>
-					
-					<!-- TV Stand -->
-					<div class="tv-stand"></div>
-				</div>
-
-				<!-- Project Info & Navigation -->
-				<div class="project-info">
-					<div class="flex items-center justify-between w-full">
-						<button class="nav-btn" onclick={prevProject}>
-							<ChevronLeft class="w-5 h-5" />
-						</button>
-						
-						<div class="text-center">
-							<h3 class="text-lg font-semibold text-espresso-800 dark:text-cream-100">
-								{projectTitles[currentIndex]}
-							</h3>
-							<div class="flex gap-2 justify-center mt-2 flex-wrap">
-								{#each projects[currentIndex]?.technologies || [] as tech}
-									<Badge variant="secondary" class="text-xs">
-										{tech}
-									</Badge>
-								{/each}
-							</div>
+					<!-- TV/Monitor Frame -->
+					<div class="tv-frame" class:mobile={isMobile}>
+						<!-- TV Screen -->
+						<div class="tv-screen">
+							<iframe 
+								src={projects[currentIndex]?.demoUrl}
+								title={projects[currentIndex]?.title}
+								class="tv-iframe"
+								sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+							></iframe>
 						</div>
 						
-						<button class="nav-btn" onclick={nextProject}>
-							<ChevronRight class="w-5 h-5" />
-						</button>
+						<!-- TV Stand -->
+						<div class="tv-stand"></div>
 					</div>
 
-					<!-- External Links -->
-					<div class="flex gap-3 mt-4">
-						<a 
-							href={projects[currentIndex]?.demoUrl}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="external-link-btn"
-						>
-							<ExternalLink class="w-4 h-4" />
-							<span>Visit Website</span>
-						</a>
-						<a 
-							href={projects[currentIndex]?.githubUrl}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="external-link-btn"
-						>
-							<Github class="w-4 h-4" />
-							<span>Source Code</span>
-						</a>
+					<!-- Project Info & Navigation -->
+					<div class="project-info mt-6">
+						<div class="flex items-center justify-between w-full">
+							<button class="nav-btn" onclick={prevProject}>
+								<ChevronLeft class="w-5 h-5" />
+							</button>
+							
+							<div class="text-center">
+								<h3 class="text-xl font-semibold text-gray-800">
+									{projectTitles[currentIndex]}
+								</h3>
+								<div class="flex gap-2 justify-center mt-2 flex-wrap">
+									{#each projects[currentIndex]?.technologies || [] as tech}
+										<Badge variant="secondary" class="text-xs">
+											{tech}
+										</Badge>
+									{/each}
+								</div>
+							</div>
+							
+							<button class="nav-btn" onclick={nextProject}>
+								<ChevronRight class="w-5 h-5" />
+							</button>
+						</div>
+
+						<!-- External Links -->
+						<div class="flex gap-3 mt-4">
+							<a 
+								href={projects[currentIndex]?.demoUrl}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="external-link-btn"
+							>
+								<ExternalLink class="w-4 h-4" />
+								<span>Visit Website</span>
+							</a>
+							<a 
+								href={projects[currentIndex]?.githubUrl}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="external-link-btn"
+							>
+								<Github class="w-4 h-4" />
+								<span>Source Code</span>
+							</a>
+						</div>
 					</div>
 				</div>
-			</div>
-		{/if}
+			{/if}
+		</div>
 	</div>
 </section>
 
@@ -202,7 +207,7 @@
 	}
 
 	.project-thumb:hover {
-		transform: translateY(-8px);
+		transform: translateY(-4px);
 	}
 
 	/* Monitor Frame */
@@ -284,7 +289,6 @@
 	/* Project Label */
 	.project-label {
 		text-align: center;
-		margin-top: 12px;
 		opacity: 0.7;
 	}
 
@@ -394,7 +398,6 @@
 
 	/* Project Info */
 	.project-info {
-		margin-top: 20px;
 		width: 100%;
 		max-width: 500px;
 	}

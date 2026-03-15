@@ -29,7 +29,7 @@ export const experience = [
     id: 3,
     type: "project",
     role: "Full-stack Developer",
-    period: "2025",
+    period: "2026",
     description: "Developed a beautiful e-commerce and coffee shop website with React, tailwindCSS nodejs and postgreSQL."
   },
 ];

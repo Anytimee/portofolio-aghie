@@ -43,6 +43,28 @@
 		}
 	];
 
+	// Map skill names to Lucide icons for better compatibility
+	const skillIconMap: Record<string, any> = {
+		"JavaScript": Code2,
+		"TypeScript": Code2,
+		"Python": Code2,
+		"SQL": Database,
+		"React": Code2,
+		"Svelte/SvelteKit": Code2,
+		"TailwindCSS": Code2,
+		"HTML/CSS": Code2,
+		"Node.js": Server,
+		"PostgreSQL": Database,
+		"REST APIs": Server,
+		"Git": Code2,
+		"Vercel": Server,
+		"Figma": Code2
+	};
+
+	function getSkillIcon(skillName: string) {
+		return skillIconMap[skillName] || Code2;
+	}
+
 	function handleMouseMove(event: MouseEvent, cardIndex: number) {
 		const card = skillCardRefs[cardIndex];
 		if (!card) return;
@@ -69,76 +91,75 @@
 
 <section 
 	id="skills" 
-	class="py-24 md:py-32 relative overflow-hidden"
+	class="py-12 md:py-16 relative overflow-hidden"
 >
 	<!-- Background -->
 	<div class="absolute inset-0 bg-dots opacity-20"></div>
 
-	<div class="container mx-auto px-6 relative z-10">
-		<!-- Section Heading -->
-		<div class="text-center mb-20">
-			<span 
-				class="text-xs uppercase tracking-[0.2em] text-espresso-500 dark:text-cream-300 mb-4 block"
-				use:scrollDirectionAnimate={{ type: 'mysterious-fade', delay: 200, duration: 800 }}
-			>What I work with</span>
-			<h2 
-				class="text-display text-espresso-800 dark:text-cream-100"
-				use:scrollDirectionAnimate={{ type: 'shadow-reveal', delay: 400, duration: 800 }}
-			>Skills</h2>
-			
-			<p 
-				class="text-muted-foreground text-lg max-w-2xl mx-auto mt-6"
-				use:scrollDirectionAnimate={{ type: 'mysterious-fade', delay: 600, duration: 800 }}
-			>
-				Technologies and tools I work with to bring ideas to life
-			</p>
-		</div>
-
-		<!-- 3D Skills Grid -->
-		<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-5xl mx-auto">
-			{#each categories as category, index}
-				<div 
-					class="h-full"
-					use:scrollDirectionAnimate={{ type: 'stagger-reveal', delay: 800 + index * 200, duration: 800, index: index }}
+	<div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+		<div class="max-w-6xl mx-auto">
+			<!-- Section Heading -->
+			<div class="text-center mb-12">
+				<span 
+					class="text-xs uppercase tracking-[0.2em] text-espresso-500 dark:text-cream-300 mb-4 block"
+					use:scrollDirectionAnimate={{ type: 'mysterious-fade', delay: 200, duration: 800 }}
+				>What I work with</span>
+				<h2 
+					class="text-3xl md:text-4xl font-bold text-espresso-800 dark:text-cream-100 mb-4"
+					use:scrollDirectionAnimate={{ type: 'shadow-reveal', delay: 400, duration: 800 }}
+				>Skills</h2>
+				
+				<p 
+					class="text-muted-foreground text-lg max-w-2xl mx-auto mt-4 leading-relaxed"
+					use:scrollDirectionAnimate={{ type: 'mysterious-fade', delay: 600, duration: 800 }}
 				>
+					Technologies and tools I work with to bring ideas to life
+				</p>
+			</div>
+
+			<!-- Skills Grid -->
+			<div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+				{#each categories as category, index}
 					<div 
 						class="h-full"
-						bind:this={skillCardRefs[index]}
-						onmousemove={(e) => handleMouseMove(e, index)}
-						onmouseleave={() => handleMouseLeave(index)}
-						role="article"
-						style="transform-style: preserve-3d; transition: transform 0.3s ease;"
+						use:scrollDirectionAnimate={{ type: 'stagger-reveal', delay: 800 + index * 200, duration: 800, index: index }}
 					>
-						<Card class="h-full bg-card/60 border border-espresso-200 dark:border-espresso-700 transition-all duration-300 {category.hoverBorder} cursor-pointer">
-							<CardHeader>
-								<div class="flex items-center gap-3 mb-3">
-									<div class="p-2.5 rounded-sm bg-espresso-100 dark:bg-espresso-800">
-										<svelte:component this={category.icon} class="w-5 h-5 text-espresso-600 dark:text-cream-300" />
+						<div 
+							class="h-full bg-gray-50 rounded-lg p-4 border border-gray-200"
+							bind:this={skillCardRefs[index]}
+							onmousemove={(e) => handleMouseMove(e, index)}
+							onmouseleave={() => handleMouseLeave(index)}
+							role="article"
+							style="transform-style: preserve-3d; transition: transform 0.3s ease;"
+						>
+							<div class="mb-4">
+								<div class="flex items-center gap-3 mb-2">
+									<div class="p-2 rounded bg-blue-100">
+										<svelte:component this={category.icon} class="w-5 h-5 text-blue-600" />
 									</div>
-									<CardTitle class="text-xl text-espresso-800 dark:text-cream-100">{category.title}</CardTitle>
+									<h3 class="text-lg font-semibold text-gray-800">{category.title}</h3>
 								</div>
-								<CardDescription class="text-muted-foreground">{category.description}</CardDescription>
-							</CardHeader>
+								<p class="text-muted-foreground text-sm">{category.description}</p>
+							</div>
 							
-							<CardContent>
-								<div class="flex flex-wrap gap-2">
-									{#each category.skills as skill, skillIndex}
-										<div 
-											class="px-3.5 py-2 bg-muted/40 rounded-sm text-sm border border-espresso-200/50 dark:border-espresso-700/50 hover:border-espresso-400 dark:hover:border-espresso-600 transition-all duration-200 cursor-default"
-											use:scrollDirectionAnimate={{ type: 'stagger-reveal', delay: 1200 + index * 200 + skillIndex * 50, duration: 800, index: skillIndex }}
-										>
-											<span class="text-base mr-1.5">{skill.icon}</span>
-											<span class="text-muted-foreground text-sm">
-												{skill.name}
-											</span>
-										</div>
-									{/each}
-								</div>
-							</CardContent>
-						</Card>
+							<div class="flex flex-wrap gap-2">
+								{#each category.skills as skill, skillIndex}
+									{@const SkillIcon = getSkillIcon(skill.name)}
+									<div 
+										class="px-3 py-2 bg-white rounded-md text-sm border border-gray-200 shadow-sm hover:shadow-md transition-shadow cursor-default flex items-center gap-2"
+										use:scrollDirectionAnimate={{ type: 'stagger-reveal', delay: 1200 + index * 200 + skillIndex * 50, duration: 800, index: skillIndex }}
+									>
+										<SkillIcon class="w-4 h-4 text-blue-500" />
+										<span class="text-gray-700 text-sm">
+											{skill.name}
+										</span>
+									</div>
+								{/each}
+							</div>
+						</div>
 					</div>
-				</div>
-			{/each}
+				{/each}
+			</div>
 		</div>
 	</div>
 </section>

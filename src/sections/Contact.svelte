@@ -79,175 +79,175 @@
 	}
 </script>
 
-<section id="contact" class="py-24 md:py-32 relative overflow-hidden">
+<section id="contact" class="py-12 md:py-16 relative overflow-hidden">
 	<!-- Background -->
 	<div class="absolute inset-0 bg-dots opacity-30"></div>
 
 	<!-- Mysterious gradient overlay -->
 	<div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-background/50 via-transparent to-background/50"></div>
 
-	<div class="container mx-auto px-6 relative z-10">
-		<!-- Section Header - Mysterious fade -->
-		<div class="text-center mb-20">
-			<span 
-				class="text-xs uppercase tracking-[0.2em] text-gold-500 mb-4 block"
-				use:scrollDirectionAnimate={{ type: 'mysterious-fade', delay: 200, duration: 800 }}
-			>Get in touch</span>
-			<h2 
-				class="text-display"
-				use:scrollDirectionAnimate={{ type: 'shadow-reveal', delay: 400, duration: 800 }}
-			>Contact</h2>
-			<p 
-				class="text-muted-foreground text-lg max-w-2xl mx-auto mt-6"
-				use:scrollDirectionAnimate={{ type: 'mysterious-fade', delay: 600, duration: 800 }}
-			>Get in touch for collaborations or just to say hello</p>
-		</div>
-
-		<div class="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
-			<!-- Contact Form - Form reveal -->
-			<div 
-				class="contact-form-container"
-				use:scrollDirectionAnimate={{ type: 'form-reveal', delay: 800, duration: 800 }}
-			>
-				<Card class="bg-card/70 border-border overflow-hidden">
-					<CardHeader>
-						<h3 class="text-xl font-medium flex items-center gap-2 text-espresso-800 dark:text-cream-100">
-							<Send class="w-5 h-5 text-gold-500" />
-							Send a Message
-						</h3>
-						<p class="text-muted-foreground text-sm mt-2">Fill out the form below and I will get back to you as soon as possible.</p>
-					</CardHeader>
-					<CardContent>
-						<form onsubmit={handleSubmit} class="space-y-5">
-							<div class="space-y-2">
-								<label for="name" class="text-sm font-medium text-espresso-700 dark:text-cream-200">Name</label>
-								<Input 
-									id="name"
-									type="text" 
-									placeholder="Your name" 
-									bind:value={name}
-									class="{errors.name ? 'border-red-500' : ''} bg-muted/50 border-border focus:border-gold-500 rounded-sm"
-								/>
-								{#if errors.name}
-									<p class="text-xs text-red-500">{errors.name}</p>
-								{/if}
-							</div>
-
-							<div class="space-y-2">
-								<label for="email" class="text-sm font-medium text-espresso-700 dark:text-cream-200">Email</label>
-								<Input 
-									id="email"
-									type="email" 
-									placeholder="your@email.com" 
-									bind:value={email}
-									class="{errors.email ? 'border-red-500' : ''} bg-muted/50 border-border focus:border-gold-500 rounded-sm"
-								/>
-								{#if errors.email}
-									<p class="text-xs text-red-500">{errors.email}</p>
-								{/if}
-							</div>
-
-							<div class="space-y-2">
-								<label for="message" class="text-sm font-medium text-espresso-700 dark:text-cream-200">Message</label>
-								<textarea 
-									id="message"
-									class="flex min-h-[140px] w-full rounded-sm border border-border bg-muted/50 px-4 py-3 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 focus-visible:ring-offset-2 transition-all duration-200 {errors.message ? 'border-red-500' : ''}"
-									placeholder="Your message..."
-									bind:value={message}
-								></textarea>
-								{#if errors.message}
-									<p class="text-xs text-red-500">{errors.message}</p>
-								{/if}
-							</div>
-
-
-
-							<Button 
-								type="button"
-								onclick={handleWhatsApp}
-								class="w-full rounded-sm bg-green-500 hover:bg-green-600 text-white font-medium transition-all duration-300 mt-3"
-								disabled={isSubmitting}
-							>
-								<MessageCircle class="w-4 h-4 mr-2" />
-								Send via WhatsApp
-							</Button>
-
-							{#if submitStatus === "success"}
-								<div class="p-3 rounded-sm bg-green-500/10 text-green-500 text-sm text-center flex items-center justify-center gap-2">
-									<CheckCircle class="w-4 h-4" />
-									Message sent successfully!
-								</div>
-							{/if}
-
-							{#if submitStatus === "error"}
-								<div class="p-3 rounded-sm bg-red-500/10 text-red-500 text-sm text-center">
-									Something went wrong. Please try again.
-								</div>
-							{/if}
-						</form>
-					</CardContent>
-				</Card>
+	<div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+		<div class="max-w-6xl mx-auto">
+			<!-- Section Header - Mysterious fade -->
+			<div class="text-center mb-12">
+				<span 
+					class="text-xs uppercase tracking-[0.2em] text-gold-500 mb-4 block"
+					use:scrollDirectionAnimate={{ type: 'mysterious-fade', delay: 200, duration: 800 }}
+				>Get in touch</span>
+				<h2 
+					class="text-3xl md:text-4xl font-bold text-espresso-800 dark:text-cream-100 mb-4"
+					use:scrollDirectionAnimate={{ type: 'shadow-reveal', delay: 400, duration: 800 }}
+				>Contact</h2>
+				<p 
+					class="text-muted-foreground text-lg max-w-2xl mx-auto mt-4 leading-relaxed"
+					use:scrollDirectionAnimate={{ type: 'mysterious-fade', delay: 600, duration: 800 }}
+				>Get in touch for collaborations or just to say hello</p>
 			</div>
 
-			<!-- Contact Info - Mysterious fade -->
-			<div 
-				class="contact-info-container"
-				use:scrollDirectionAnimate={{ type: 'mysterious-fade', delay: 1100, duration: 800 }}
-			>
-				<Card class="h-full bg-card/70 border-border">
-					<CardHeader>
-						<h3 class="text-xl font-medium flex items-center gap-2 text-espresso-800 dark:text-cream-100">
-							<Mail class="w-5 h-5 text-gold-500" />
-							Contact Information
-						</h3>
-						<p class="text-muted-foreground text-sm mt-2">Feel free to reach out through any of these channels.</p>
-					</CardHeader>
-					<CardContent class="space-y-5">
-						<!-- Email -->
-						<div class="flex items-start gap-4 p-4 rounded-sm bg-muted/30 border border-border/50">
-							<div class="w-11 h-11 rounded-sm bg-espresso-100 dark:bg-espresso-800 flex items-center justify-center flex-shrink-0">
-								<Mail class="w-5 h-5 text-gold-500" />
-							</div>
-							<div>
-								<p class="font-medium text-espresso-800 dark:text-cream-100">Email</p>
-								<a href="mailto:{profileEmail}" class="text-muted-foreground hover:text-gold-500 transition-colors">{profileEmail}</a>
-							</div>
-						</div>
+			<div class="grid md:grid-cols-2 gap-8">
+				<!-- Contact Form - Form reveal -->
+				<div 
+					class="contact-form-container"
+					use:scrollDirectionAnimate={{ type: 'form-reveal', delay: 800, duration: 800 }}
+				>
+					<Card class="bg-white border border-gray-200 rounded-lg shadow-sm">
+						<CardHeader>
+							<h3 class="text-xl font-semibold flex items-center gap-2 text-gray-800">
+								<Send class="w-5 h-5 text-blue-500" />
+								Send a Message
+							</h3>
+							<p class="text-muted-foreground text-sm mt-2">Fill out the form below and I will get back to you as soon as possible.</p>
+						</CardHeader>
+						<CardContent>
+							<form onsubmit={handleSubmit} class="space-y-5">
+								<div class="space-y-2">
+									<label for="name" class="text-sm font-medium text-gray-700">Name</label>
+									<Input 
+										id="name"
+										type="text" 
+										placeholder="Your name" 
+										bind:value={name}
+										class="{errors.name ? 'border-red-500' : 'border-gray-300'} rounded-lg px-4 py-3 w-full focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+									/>
+									{#if errors.name}
+										<p class="text-xs text-red-500">{errors.name}</p>
+									{/if}
+								</div>
 
-						<!-- WhatsApp -->
-						<div class="flex items-start gap-4 p-4 rounded-sm bg-muted/30 border border-border/50">
-							<div class="w-11 h-11 rounded-sm bg-espresso-100 dark:bg-espresso-800 flex items-center justify-center flex-shrink-0">
-								<MessageCircle class="w-5 h-5 text-green-500" />
-							</div>
-							<div>
-								<p class="font-medium text-espresso-800 dark:text-cream-100">WhatsApp</p>
-								<a href="https://wa.me/{profileWhatsApp}" target="_blank" class="text-muted-foreground hover:text-green-500 transition-colors">Chat on WhatsApp</a>
-							</div>
-						</div>
+								<div class="space-y-2">
+									<label for="email" class="text-sm font-medium text-gray-700">Email</label>
+									<Input 
+										id="email"
+										type="email" 
+										placeholder="your@email.com" 
+										bind:value={email}
+										class="{errors.email ? 'border-red-500' : 'border-gray-300'} rounded-lg px-4 py-3 w-full focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+									/>
+									{#if errors.email}
+										<p class="text-xs text-red-500">{errors.email}</p>
+									{/if}
+								</div>
 
-						<!-- Location -->
-						<div class="flex items-start gap-4 p-4 rounded-sm bg-muted/30 border border-border/50">
-							<div class="w-11 h-11 rounded-sm bg-espresso-100 dark:bg-espresso-800 flex items-center justify-center flex-shrink-0">
-								<MapPin class="w-5 h-5 text-gold-500" />
-							</div>
-							<div>
-								<p class="font-medium text-espresso-800 dark:text-cream-100">Location</p>
-								<p class="text-muted-foreground">{profileLocation}</p>
-							</div>
-						</div>
+								<div class="space-y-2">
+									<label for="message" class="text-sm font-medium text-gray-700">Message</label>
+									<textarea 
+										id="message"
+										class="flex min-h-[140px] w-full rounded-lg border border-gray-300 px-4 py-3 text-sm placeholder:text-muted-foreground focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-colors duration-200 {errors.message ? 'border-red-500' : ''}"
+										placeholder="Your message..."
+										bind:value={message}
+									></textarea>
+									{#if errors.message}
+										<p class="text-xs text-red-500">{errors.message}</p>
+									{/if}
+								</div>
 
-						<!-- Availability -->
-						<div class="flex items-start gap-4 p-4 rounded-sm bg-muted/30 border border-border/50">
-							<div class="w-11 h-11 rounded-sm bg-espresso-100 dark:bg-espresso-800 flex items-center justify-center flex-shrink-0">
-								<Clock class="w-5 h-5 text-gold-500" />
+								<Button 
+									type="button"
+									onclick={handleWhatsApp}
+									class="w-full rounded-lg bg-green-500 hover:bg-green-600 text-white font-medium px-6 py-3 transition-colors duration-200"
+									disabled={isSubmitting}
+								>
+									<MessageCircle class="w-4 h-4 mr-2" />
+									Send via WhatsApp
+								</Button>
+
+								{#if submitStatus === "success"}
+									<div class="p-3 rounded-lg bg-green-500/10 text-green-500 text-sm text-center flex items-center justify-center gap-2">
+										<CheckCircle class="w-4 h-4" />
+										Message sent successfully!
+									</div>
+								{/if}
+
+								{#if submitStatus === "error"}
+									<div class="p-3 rounded-lg bg-red-500/10 text-red-500 text-sm text-center">
+										Something went wrong. Please try again.
+									</div>
+								{/if}
+							</form>
+						</CardContent>
+					</Card>
+				</div>
+
+				<!-- Contact Info - Mysterious fade -->
+				<div 
+					class="contact-info-container"
+					use:scrollDirectionAnimate={{ type: 'mysterious-fade', delay: 1100, duration: 800 }}
+				>
+					<Card class="h-full bg-white border border-gray-200 rounded-lg shadow-sm">
+						<CardHeader>
+							<h3 class="text-xl font-semibold flex items-center gap-2 text-gray-800">
+								<Mail class="w-5 h-5 text-blue-500" />
+								Contact Information
+							</h3>
+							<p class="text-muted-foreground text-sm mt-2">Feel free to reach out through any of these channels.</p>
+						</CardHeader>
+						<CardContent class="space-y-4">
+							<!-- Email -->
+							<div class="flex items-start gap-4 p-4 rounded-lg bg-gray-50 border border-gray-100">
+								<div class="w-11 h-11 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
+									<Mail class="w-5 h-5 text-blue-600" />
+								</div>
+								<div>
+									<p class="font-medium text-gray-800">Email</p>
+									<a href="mailto:{profileEmail}" class="text-muted-foreground hover:text-blue-500 transition-colors">{profileEmail}</a>
+								</div>
 							</div>
-							<div>
-								<p class="font-medium text-espresso-800 dark:text-cream-100">Availability</p>
-								<p class="text-muted-foreground">Open to new opportunities</p>
+
+							<!-- WhatsApp -->
+							<div class="flex items-start gap-4 p-4 rounded-lg bg-gray-50 border border-gray-100">
+								<div class="w-11 h-11 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
+									<MessageCircle class="w-5 h-5 text-green-600" />
+								</div>
+								<div>
+									<p class="font-medium text-gray-800">WhatsApp</p>
+									<a href="https://wa.me/{profileWhatsApp}" target="_blank" class="text-muted-foreground hover:text-green-500 transition-colors">Chat on WhatsApp</a>
+								</div>
 							</div>
-						</div>
-					</CardContent>
-				</Card>
+
+							<!-- Location -->
+							<div class="flex items-start gap-4 p-4 rounded-lg bg-gray-50 border border-gray-100">
+								<div class="w-11 h-11 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
+									<MapPin class="w-5 h-5 text-blue-600" />
+								</div>
+								<div>
+									<p class="font-medium text-gray-800">Location</p>
+									<p class="text-muted-foreground">{profileLocation}</p>
+								</div>
+							</div>
+
+							<!-- Availability -->
+							<div class="flex items-start gap-4 p-4 rounded-lg bg-gray-50 border border-gray-100">
+								<div class="w-11 h-11 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
+									<Clock class="w-5 h-5 text-blue-600" />
+								</div>
+								<div>
+									<p class="font-medium text-gray-800">Availability</p>
+									<p class="text-muted-foreground">Open to new opportunities</p>
+								</div>
+							</div>
+						</CardContent>
+					</Card>
+				</div>
 			</div>
 		</div>
 	</div>
