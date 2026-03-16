@@ -14,6 +14,7 @@
     filter: blur(12px) brightness(0.8);
     transform: translateY(60px) scale(0.98);
   }
+
   100% {
     opacity: 1;
     filter: blur(0) brightness(1);
@@ -27,10 +28,12 @@
     opacity: 0;
     filter: blur(8px);
   }
+
   50% {
     opacity: 0.5;
     filter: blur(4px);
   }
+
   100% {
     opacity: 1;
     filter: blur(0);
@@ -39,15 +42,20 @@
 
 /* Parallax Float - Subtle depth movement */
 @keyframes parallaxFloat {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0) translateX(0);
   }
+
   25% {
     transform: translateY(-8px) translateX(4px);
   }
+
   50% {
     transform: translateY(-4px) translateX(-4px);
   }
+
   75% {
     transform: translateY(-12px) translateX(2px);
   }
@@ -55,9 +63,12 @@
 
 /* Slow Float - Gentle breathing motion */
 @keyframes slowFloat {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-15px);
   }
@@ -72,12 +83,14 @@
     mask-image: radial-gradient(circle at center, black 0%, transparent 0%);
     -webkit-mask-image: radial-gradient(circle at center, black 0%, transparent 0%);
   }
+
   60% {
     opacity: 0.7;
     filter: blur(8px) brightness(0.8);
     mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
     -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
   }
+
   100% {
     opacity: 1;
     filter: blur(0) brightness(1);
@@ -89,16 +102,47 @@
 
 /* Grain/Noise overlay */
 @keyframes grainNoise {
-  0%, 100% { transform: translate(0, 0); }
-  10% { transform: translate(-5%, -10%); }
-  20% { transform: translate(-15%, 5%); }
-  30% { transform: translate(7%, -25%); }
-  40% { transform: translate(-5%, 25%); }
-  50% { transform: translate(-15%, 10%); }
-  60% { transform: translate(15%, 0%); }
-  70% { transform: translate(0%, 15%); }
-  80% { transform: translate(3%, 35%); }
-  90% { transform: translate(-10%, 10%); }
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  10% {
+    transform: translate(-5%, -10%);
+  }
+
+  20% {
+    transform: translate(-15%, 5%);
+  }
+
+  30% {
+    transform: translate(7%, -25%);
+  }
+
+  40% {
+    transform: translate(-5%, 25%);
+  }
+
+  50% {
+    transform: translate(-15%, 10%);
+  }
+
+  60% {
+    transform: translate(15%, 0%);
+  }
+
+  70% {
+    transform: translate(0%, 15%);
+  }
+
+  80% {
+    transform: translate(3%, 35%);
+  }
+
+  90% {
+    transform: translate(-10%, 10%);
+  }
 }
 
 /* Stagger reveal from bottom with blur */
@@ -108,6 +152,7 @@
     filter: blur(10px);
     transform: translateY(50px);
   }
+
   100% {
     opacity: 1;
     filter: blur(0);
@@ -122,6 +167,7 @@
     filter: blur(6px);
     transform: translateX(-20px);
   }
+
   100% {
     opacity: 1;
     filter: blur(0);
@@ -136,6 +182,7 @@
     filter: blur(15px);
     transform: translateY(30px);
   }
+
   100% {
     opacity: 1;
     filter: blur(0);
@@ -145,10 +192,13 @@
 
 /* Mystic pulse - Subtle breathing glow */
 @keyframes mysticPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.3;
     transform: scale(1);
   }
+
   50% {
     opacity: 0.5;
     transform: scale(1.05);
@@ -214,6 +264,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -225,6 +276,7 @@
     opacity: 0;
     transform: translateY(-30px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -236,6 +288,7 @@
     opacity: 0;
     transform: translateX(30px);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0);
@@ -247,6 +300,7 @@
     opacity: 0;
     transform: translateX(-30px);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0);
@@ -258,6 +312,7 @@
     opacity: 0;
     transform: scale(0.95);
   }
+
   100% {
     opacity: 1;
     transform: scale(1);
@@ -269,6 +324,7 @@
     opacity: 0;
     filter: blur(10px);
   }
+
   100% {
     opacity: 1;
     filter: blur(0);
@@ -279,6 +335,7 @@
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
@@ -289,6 +346,7 @@
     opacity: 0;
     transform: translateY(24px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -354,6 +412,7 @@
     filter: blur(0) brightness(1);
     transform: translateY(0) scale(1);
   }
+
   100% {
     opacity: 0;
     filter: blur(12px) brightness(0.8);
@@ -367,10 +426,12 @@
     opacity: 1;
     filter: blur(0);
   }
+
   50% {
     opacity: 0.5;
     filter: blur(4px);
   }
+
   100% {
     opacity: 0;
     filter: blur(8px);
@@ -384,6 +445,7 @@
     filter: blur(0);
     transform: translateY(0);
   }
+
   100% {
     opacity: 0;
     filter: blur(10px);
@@ -398,6 +460,7 @@
     filter: blur(0);
     transform: translateX(0);
   }
+
   100% {
     opacity: 0;
     filter: blur(6px);
@@ -412,6 +475,7 @@
     filter: blur(0);
     transform: translateY(0);
   }
+
   100% {
     opacity: 0;
     filter: blur(15px);
@@ -428,12 +492,14 @@
     mask-image: radial-gradient(circle at center, black 100%, transparent 100%);
     -webkit-mask-image: radial-gradient(circle at center, black 100%, transparent 100%);
   }
+
   40% {
     opacity: 0.7;
     filter: blur(8px) brightness(0.8);
     mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
     -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
   }
+
   100% {
     opacity: 0;
     filter: blur(20px) brightness(0.5);
@@ -449,6 +515,7 @@
     opacity: 1;
     transform: translateY(0);
   }
+
   100% {
     opacity: 0;
     transform: translateY(30px);
@@ -461,6 +528,7 @@
     opacity: 1;
     transform: translateY(0);
   }
+
   100% {
     opacity: 0;
     transform: translateY(-30px);
@@ -473,6 +541,7 @@
     opacity: 1;
     transform: translateX(0);
   }
+
   100% {
     opacity: 0;
     transform: translateX(30px);
@@ -485,6 +554,7 @@
     opacity: 1;
     transform: translateX(0);
   }
+
   100% {
     opacity: 0;
     transform: translateX(-30px);
@@ -497,6 +567,7 @@
     opacity: 1;
     transform: scale(1);
   }
+
   100% {
     opacity: 0;
     transform: scale(0.95);
@@ -509,6 +580,7 @@
     opacity: 1;
     filter: blur(0);
   }
+
   100% {
     opacity: 0;
     filter: blur(10px);
@@ -520,6 +592,7 @@
   0% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
@@ -658,7 +731,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.3), transparent);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), transparent);
   opacity: 0;
   transition: opacity 1s ease;
 }
@@ -668,38 +741,39 @@
 }
 
 @layer base {
+
   /* Light Mode - Editorial Warm Palette (60-30-10 Rule) */
   :root {
     /* 60% Dominant - Cream/Beige Background */
     --background: 35 23% 97%;
     --foreground: 35 20% 15%;
-    
+
     /* 30% Secondary - Espresso Brown */
     --primary: 35 30% 22%;
     --primary-foreground: 35 23% 97%;
-    
+
     --secondary: 35 15% 45%;
     --secondary-foreground: 35 20% 15%;
-    
+
     /* Muted - Light Cream */
     --muted: 35 18% 93%;
     --muted-foreground: 35 12% 45%;
-    
+
     /* 10% Accent - Warm Gold */
     --accent: 42 52% 58%;
     --accent-foreground: 35 20% 15%;
-    
+
     /* Destructive */
     --destructive: 0 60% 45%;
-    
+
     /* Card - Warm White */
     --card: 35 15% 98%;
     --card-foreground: 35 20% 15%;
-    
+
     /* Input & Ring */
     --input: 35 15% 88%;
     --ring: 42 52% 58%;
-    
+
     /* Custom Variables */
     --text: #5D5044;
     --text-h: #2C2416;
@@ -712,13 +786,13 @@
     --social-bg: rgba(250, 248, 245, 0.85);
     --glass-bg: rgba(250, 248, 245, 0.85);
     --glass-border: rgba(212, 200, 184, 0.5);
-    
+
     /* Typography */
     --sans: 'Playfair Display', 'Georgia', serif;
     --heading: 'Playfair Display', 'Georgia', serif;
     --body: 'Source Sans 3', system-ui, -apple-system, sans-serif;
     --mono: 'JetBrains Mono', 'Fira Code', monospace;
-    
+
     font: 17px/160% var(--body);
     letter-spacing: 0.01em;
     color-scheme: light;
@@ -730,50 +804,140 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Dark Mode - Deep Espresso with Gold Accent */
+  /* Dark Mode - Spider-Man Theme */
   .dark {
-    /* 60% Dominant - Deep Brown */
-    --background: 30 25% 8%;
-    --foreground: 35 18% 93%;
-    
-    /* 30% Secondary - Medium Brown */
-    --primary: 42 52% 58%;
-    --primary-foreground: 30 25% 10%;
-    
-    --secondary: 30 15% 35%;
-    --secondary-foreground: 35 18% 93%;
-    
-    /* Muted - Dark Brown */
-    --muted: 30 20% 12%;
-    --muted-foreground: 35 10% 60%;
-    
-    /* 10% Accent - Gold (brighter for dark) */
-    --accent: 42 65% 65%;
-    --accent-foreground: 30 25% 10%;
-    
+    /* 60% Dominant - Deep Black (New York Night) */
+    --background: 0 0% 4%;
+    --foreground: 0 0% 95%;
+
+    /* 30% Secondary - Web Gray */
+    --primary: 350 82% 44%;
+    /* Spider-Man Red #E11D2E */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 17%;
+    /* #2A2A2A */
+    --secondary-foreground: 0 0% 95%;
+
+    /* Muted - Dark Gray */
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
+
+    /* 10% Accent - Spider-Man Red */
+    --accent: 350 82% 44%;
+    /* #E11D2E */
+    --accent-foreground: 0 0% 100%;
+
     /* Destructive */
-    --destructive: 0 60% 45%;
-    
-    /* Card */
-    --card: 30 22% 11%;
-    --card-foreground: 35 18% 93%;
-    
+    --destructive: 0 84% 50%;
+
+    /* Card - Dark Panel */
+    --card: 0 0% 8%;
+    /* #141414 */
+    --card-foreground: 0 0% 95%;
+
     /* Input & Ring */
-    --input: 30 18% 18%;
-    --ring: 42 52% 58%;
-    
-    /* Custom Variables */
-    --text: #B8AC96;
-    --text-h: #F5EDE0;
-    --bg: #1A1610;
-    --border: #3D342A;
-    --code-bg: #2C2416;
-    --accent-color: #D4A267;
-    --accent-bg: rgba(201, 169, 98, 0.15);
-    --accent-border: rgba(201, 169, 98, 0.4);
-    --social-bg: rgba(26, 22, 16, 0.85);
-    --glass-bg: rgba(26, 22, 16, 0.85);
-    --glass-border: rgba(61, 52, 42, 0.5);
+    --input: 0 0% 17%;
+    --ring: 350 82% 44%;
+
+    /* Custom Variables - Spider-Man Theme */
+    --text: #B0B0B0;
+    --text-h: #F0F0F0;
+    --bg: #0B0B0B;
+    /* Deep black */
+    --border: #2A2A2A;
+    /* Web gray */
+    --code-bg: #1A1A1A;
+    --accent-color: #E11D2E;
+    /* Spider-Man red */
+    --accent-bg: rgba(225, 29, 46, 0.15);
+    --accent-border: rgba(225, 29, 46, 0.4);
+    --social-bg: rgba(11, 11, 11, 0.85);
+    --glass-bg: rgba(11, 11, 11, 0.85);
+    --glass-border: rgba(42, 42, 42, 0.5);
+  }
+
+  /* ============================================
+     SPIDER-MAN THEME ADDITIONS
+     Dark mode only - subtle web patterns
+  ============================================ */
+
+  .dark {
+    /* Spider-web background pattern */
+    --web-pattern: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0v60M0 30h60M15 15l30 30M45 15L15 45' stroke='%232A2A2A' stroke-width='0.5' fill='none' opacity='0.3'/%3E%3Ccircle cx='30' cy='30' r='20' stroke='%232A2A2A' stroke-width='0.5' fill='none' opacity='0.2'/%3E%3Ccircle cx='30' cy='30' r='10' stroke='%232A2A2A' stroke-width='0.5' fill='none' opacity='0.2'/%3E%3C/svg%3E");
+  }
+
+  /* Spider-web background for sections */
+  .dark .web-pattern {
+    background-image: var(--web-pattern);
+    background-size: 60px 60px;
+  }
+
+  /* Section divider with spider-web inspired line */
+  .dark .section-divider {
+    border-color: #E11D2E;
+    opacity: 0.3;
+  }
+
+  /* Red glow effect for dark mode */
+  .dark .red-glow {
+    box-shadow: 0 0 20px rgba(225, 29, 46, 0.3);
+  }
+
+  .dark .red-glow-subtle {
+    box-shadow: 0 0 10px rgba(225, 29, 46, 0.2);
+  }
+
+  /* Card with red border */
+  .dark .card-red-border {
+    border: 1px solid rgba(225, 29, 46, 0.3);
+  }
+
+  .dark .card-red-border:hover {
+    border-color: rgba(225, 29, 46, 0.6);
+  }
+
+  /* Button red outline style */
+  .dark .btn-red-outline {
+    border: 1px solid #E11D2E;
+    color: #E11D2E;
+    background: transparent;
+  }
+
+  .dark .btn-red-outline:hover {
+    background: #E11D2E;
+    color: #0B0B0B;
+  }
+
+  /* Red accent underline */
+  .dark .accent-underline {
+    background: #E11D2E;
+  }
+
+  /* Scrollbar for dark mode */
+  .dark ::-webkit-scrollbar-thumb {
+    background: #E11D2E;
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #FF3344;
+  }
+
+  /* Selection color */
+  .dark ::selection {
+    background: rgba(225, 29, 46, 0.4);
+    color: #F0F0F0;
+  }
+
+  /* Focus ring in dark mode */
+  .dark :focus-visible {
+    outline: 2px solid #E11D2E;
+    outline-offset: 2px;
+  }
+
+  /* Red text accent */
+  .dark .text-accent-red {
+    color: #E11D2E;
   }
 }
 
@@ -1062,23 +1226,19 @@ code {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.1),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
 
 .dark .skeleton::after {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.05),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.05),
+      transparent);
 }
 
 /* Fade in on load for images */
@@ -1092,14 +1252,45 @@ code {
 }
 
 /* Stagger delays for children */
-.stagger-1 { transition-delay: 100ms; animation-delay: 100ms; }
-.stagger-2 { transition-delay: 200ms; animation-delay: 200ms; }
-.stagger-3 { transition-delay: 300ms; animation-delay: 300ms; }
-.stagger-4 { transition-delay: 400ms; animation-delay: 400ms; }
-.stagger-5 { transition-delay: 500ms; animation-delay: 500ms; }
-.stagger-6 { transition-delay: 600ms; animation-delay: 600ms; }
-.stagger-7 { transition-delay: 700ms; animation-delay: 700ms; }
-.stagger-8 { transition-delay: 800ms; animation-delay: 800ms; }
+.stagger-1 {
+  transition-delay: 100ms;
+  animation-delay: 100ms;
+}
+
+.stagger-2 {
+  transition-delay: 200ms;
+  animation-delay: 200ms;
+}
+
+.stagger-3 {
+  transition-delay: 300ms;
+  animation-delay: 300ms;
+}
+
+.stagger-4 {
+  transition-delay: 400ms;
+  animation-delay: 400ms;
+}
+
+.stagger-5 {
+  transition-delay: 500ms;
+  animation-delay: 500ms;
+}
+
+.stagger-6 {
+  transition-delay: 600ms;
+  animation-delay: 600ms;
+}
+
+.stagger-7 {
+  transition-delay: 700ms;
+  animation-delay: 700ms;
+}
+
+.stagger-8 {
+  transition-delay: 800ms;
+  animation-delay: 800ms;
+}
 
 /* Background Patterns */
 .bg-dots {
@@ -1108,7 +1299,7 @@ code {
 }
 
 .bg-grid {
-  background-image: 
+  background-image:
     linear-gradient(to right, var(--border) 1px, transparent 1px),
     linear-gradient(to bottom, var(--border) 1px, transparent 1px);
   background-size: 40px 40px;
@@ -1246,8 +1437,15 @@ html {
 }
 
 @keyframes gradientMove {
-  0%, 100% { background-position: 0% center; }
-  50% { background-position: 100% center; }
+
+  0%,
+  100% {
+    background-position: 0% center;
+  }
+
+  50% {
+    background-position: 100% center;
+  }
 }
 
 /* Subtle parallax container */

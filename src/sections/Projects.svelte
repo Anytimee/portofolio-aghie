@@ -1,7 +1,13 @@
 <script lang="ts">
 	import { projects } from "$lib/data";
 	import { Badge } from "$lib/components/ui";
-	import { ExternalLink, Github, ChevronLeft, ChevronRight, X } from "lucide-svelte";
+	import {
+		ExternalLink,
+		Github,
+		ChevronLeft,
+		ChevronRight,
+		X,
+	} from "lucide-svelte";
 	import { scrollDirectionAnimate } from "$lib/utils/animation";
 	import { onMount } from "svelte";
 	import { fade, slide } from "svelte/transition";
@@ -16,12 +22,12 @@
 
 	onMount(() => {
 		checkMobile();
-		window.addEventListener('resize', checkMobile);
-		return () => window.removeEventListener('resize', checkMobile);
+		window.addEventListener("resize", checkMobile);
+		return () => window.removeEventListener("resize", checkMobile);
 	});
 
 	function selectProject(id: number) {
-		currentIndex = projects.findIndex(p => p.id === id);
+		currentIndex = projects.findIndex((p) => p.id === id);
 		selectedProject = id;
 	}
 
@@ -40,50 +46,63 @@
 	}
 
 	function handleKeydown(event: KeyboardEvent) {
-		if (event.key === 'Escape' && selectedProject) {
+		if (event.key === "Escape" && selectedProject) {
 			closePreview();
-		} else if (event.key === 'ArrowRight' && selectedProject) {
+		} else if (event.key === "ArrowRight" && selectedProject) {
 			nextProject();
-		} else if (event.key === 'ArrowLeft' && selectedProject) {
+		} else if (event.key === "ArrowLeft" && selectedProject) {
 			prevProject();
 		}
 	}
 
 	onMount(() => {
-		window.addEventListener('keydown', handleKeydown);
-		return () => window.removeEventListener('keydown', handleKeydown);
+		window.addEventListener("keydown", handleKeydown);
+		return () => window.removeEventListener("keydown", handleKeydown);
 	});
 
 	const projectTitles = ["Storeia", "Ruang Indah", "Portfolio", "Weather"];
 </script>
 
-<section 
-	id="projects" 
-	class="py-12 md:py-16 relative overflow-hidden"
->
+<section id="projects" class="py-12 md:py-16 relative overflow-hidden">
 	<!-- Background -->
 	<div class="absolute inset-0 bg-dots opacity-30"></div>
-	<div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-background/50 via-transparent to-background/50"></div>
+	<div
+		class="absolute inset-0 pointer-events-none bg-gradient-to-b from-background/50 via-transparent to-background/50"
+	></div>
 
 	<div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 		<div class="max-w-6xl mx-auto">
 			<!-- Section Header -->
 			<div class="text-center mb-12">
-				<span 
-					class="text-xs uppercase tracking-[0.2em] text-gold-500 mb-4 block"
-					use:scrollDirectionAnimate={{ type: 'mysterious-fade', delay: 200, duration: 800 }}
-				>My work</span>
-				<h2 
+				<span
+					class="text-xs uppercase tracking-[0.2em] text-gold-500 dark:text-[#E11D2E] mb-4 block"
+					use:scrollDirectionAnimate={{
+						type: "mysterious-fade",
+						delay: 200,
+						duration: 800,
+					}}>My work</span
+				>
+				<h2
 					class="text-3xl md:text-4xl font-bold text-espresso-800 dark:text-cream-100 mb-4"
-					use:scrollDirectionAnimate={{ type: 'shadow-reveal', delay: 400, duration: 800 }}
-				>Projects</h2>
+					use:scrollDirectionAnimate={{
+						type: "shadow-reveal",
+						delay: 400,
+						duration: 800,
+					}}
+				>
+					Projects
+				</h2>
 			</div>
 
 			<!-- Project Selection Grid (when no project selected) -->
 			{#if selectedProject === null}
-				<div 
+				<div
 					class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
-					use:scrollDirectionAnimate={{ type: 'stagger-reveal', delay: 600, duration: 800 }}
+					use:scrollDirectionAnimate={{
+						type: "stagger-reveal",
+						delay: 600,
+						duration: 800,
+					}}
 				>
 					{#each projects as project, index}
 						<button
@@ -91,19 +110,24 @@
 							onclick={() => selectProject(project.id)}
 						>
 							<!-- Card -->
-							<div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
+							<div
+								class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow"
+							>
 								<!-- Monitor/TV Frame -->
 								<div class="monitor-frame">
 									<!-- Monitor Screen -->
 									<div class="monitor-screen">
-										<img 
-											src={project.image || "/project1.png"} 
+										<img
+											src={project.image ||
+												"/project1.png"}
 											alt={project.title}
 											class="monitor-img"
 											loading="lazy"
 										/>
 										<div class="monitor-overlay">
-											<span class="monitor-title">{projectTitles[index]}</span>
+											<span class="monitor-title"
+												>{projectTitles[index]}</span
+											>
 										</div>
 									</div>
 									<!-- Monitor Stand -->
@@ -113,7 +137,10 @@
 								</div>
 								<!-- Project Label -->
 								<div class="project-label mt-4">
-									<span class="text-xs uppercase tracking-[0.2em] text-gold-500">Click to preview</span>
+									<span
+										class="text-xs uppercase tracking-[0.2em] text-gold-500"
+										>Click to preview</span
+									>
 								</div>
 							</div>
 						</button>
@@ -121,7 +148,10 @@
 				</div>
 			{:else}
 				<!-- Single TV/Monitor Display -->
-				<div class="flex flex-col items-center" transition:fade={{ duration: 200 }}>
+				<div
+					class="flex flex-col items-center"
+					transition:fade={{ duration: 200 }}
+				>
 					<!-- Close Button -->
 					<button class="close-btn" onclick={closePreview}>
 						<X class="w-5 h-5" />
@@ -131,14 +161,14 @@
 					<div class="tv-frame" class:mobile={isMobile}>
 						<!-- TV Screen -->
 						<div class="tv-screen">
-							<iframe 
+							<iframe
 								src={projects[currentIndex]?.demoUrl}
 								title={projects[currentIndex]?.title}
 								class="tv-iframe"
 								sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
 							></iframe>
 						</div>
-						
+
 						<!-- TV Stand -->
 						<div class="tv-stand"></div>
 					</div>
@@ -149,20 +179,25 @@
 							<button class="nav-btn" onclick={prevProject}>
 								<ChevronLeft class="w-5 h-5" />
 							</button>
-							
+
 							<div class="text-center">
 								<h3 class="text-xl font-semibold text-gray-800">
 									{projectTitles[currentIndex]}
 								</h3>
-								<div class="flex gap-2 justify-center mt-2 flex-wrap">
+								<div
+									class="flex gap-2 justify-center mt-2 flex-wrap"
+								>
 									{#each projects[currentIndex]?.technologies || [] as tech}
-										<Badge variant="secondary" class="text-xs">
+										<Badge
+											variant="secondary"
+											class="text-xs"
+										>
 											{tech}
 										</Badge>
 									{/each}
 								</div>
 							</div>
-							
+
 							<button class="nav-btn" onclick={nextProject}>
 								<ChevronRight class="w-5 h-5" />
 							</button>
@@ -170,7 +205,7 @@
 
 						<!-- External Links -->
 						<div class="flex gap-3 mt-4">
-							<a 
+							<a
 								href={projects[currentIndex]?.demoUrl}
 								target="_blank"
 								rel="noopener noreferrer"
@@ -179,7 +214,7 @@
 								<ExternalLink class="w-4 h-4" />
 								<span>Visit Website</span>
 							</a>
-							<a 
+							<a
 								href={projects[currentIndex]?.githubUrl}
 								target="_blank"
 								rel="noopener noreferrer"
@@ -218,10 +253,10 @@
 		background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
 		border-radius: 16px;
 		padding: 12px;
-		box-shadow: 
-			0 0 0 2px rgba(255,255,255,0.1),
-			0 0 0 6px rgba(0,0,0,0.3),
-			0 20px 50px rgba(0,0,0,0.5);
+		box-shadow:
+			0 0 0 2px rgba(255, 255, 255, 0.1),
+			0 0 0 6px rgba(0, 0, 0, 0.3),
+			0 20px 50px rgba(0, 0, 0, 0.5);
 	}
 
 	.monitor-screen {
@@ -250,7 +285,11 @@
 		left: 0;
 		right: 0;
 		padding: 16px;
-		background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+		background: linear-gradient(
+			to top,
+			rgba(0, 0, 0, 0.85) 0%,
+			transparent 100%
+		);
 		display: flex;
 		align-items: flex-end;
 		justify-content: space-between;
@@ -260,7 +299,7 @@
 		color: #fff;
 		font-weight: 700;
 		font-size: 16px;
-		text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 	}
 
 	/* Monitor Stand */
@@ -272,7 +311,7 @@
 	}
 
 	.monitor-stand::before {
-		content: '';
+		content: "";
 		width: 60px;
 		height: 8px;
 		background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
@@ -328,7 +367,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background: rgba(0,0,0,0.5);
+		background: rgba(0, 0, 0, 0.5);
 		border: none;
 		border-radius: 50%;
 		color: #fff;
@@ -338,7 +377,7 @@
 	}
 
 	.close-btn:hover {
-		background: rgba(0,0,0,0.7);
+		background: rgba(0, 0, 0, 0.7);
 		transform: scale(1.1);
 	}
 
@@ -351,10 +390,10 @@
 		background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
 		border-radius: 24px;
 		padding: 20px;
-		box-shadow: 
-			0 0 0 3px rgba(255,255,255,0.15),
-			0 0 0 8px rgba(0,0,0,0.3),
-			0 40px 100px rgba(0,0,0,0.7);
+		box-shadow:
+			0 0 0 3px rgba(255, 255, 255, 0.15),
+			0 0 0 8px rgba(0, 0, 0, 0.3),
+			0 40px 100px rgba(0, 0, 0, 0.7);
 	}
 
 	.tv-frame.mobile {
@@ -443,7 +482,7 @@
 		.project-info {
 			padding: 0 20px;
 		}
-		
+
 		.external-link-btn {
 			padding: 8px 16px;
 			font-size: 13px;

@@ -113,14 +113,14 @@
 	<!-- Mysterious floating orbs - Parallax depth -->
 	<div class="absolute inset-0 pointer-events-none overflow-hidden">
 		<div
-			class="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-gold-500/5 dark:bg-gold-500/3 blur-3xl animate-slow-float"
+			class="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-gold-500/5 dark:bg-[#E11D2E]/10 blur-3xl animate-slow-float"
 		></div>
 		<div
-			class="absolute bottom-1/3 right-1/4 w-96 h-96 rounded-full bg-espresso-300/5 dark:bg-espresso-700/10 blur-3xl animate-slow-float"
+			class="absolute bottom-1/3 right-1/4 w-96 h-96 rounded-full bg-espresso-300/5 dark:bg-[#2A2A2A]/50 blur-3xl animate-slow-float"
 			style="animation-delay: -3s;"
 		></div>
 		<div
-			class="absolute top-1/2 right-1/3 w-48 h-48 rounded-full bg-gold-500/3 dark:bg-gold-500/5 blur-2xl animate-parallax"
+			class="absolute top-1/2 right-1/3 w-48 h-48 rounded-full bg-gold-500/3 dark:bg-[#E11D2E]/10 blur-2xl animate-parallax"
 			style="animation-delay: -5s;"
 		></div>
 	</div>
@@ -133,10 +133,10 @@
 	<!-- Subtle warm glow lines -->
 	<div class="absolute inset-0 pointer-events-none">
 		<div
-			class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-500/20 to-transparent"
+			class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-500/20 dark:via-[#E11D2E]/20 to-transparent"
 		></div>
 		<div
-			class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-500/10 to-transparent"
+			class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-500/10 dark:via-[#E11D2E]/10 to-transparent"
 		></div>
 	</div>
 
@@ -148,7 +148,7 @@
 				style="animation-delay: 300ms;"
 			>
 				<span
-					class="w-1.5 h-1.5 rounded-full bg-gold-500 animate-mystic-pulse"
+					class="w-1.5 h-1.5 rounded-full bg-gold-500 dark:bg-[#E11D2E] animate-mystic-pulse"
 				></span>
 				Available for projects
 			</div>
@@ -173,7 +173,7 @@
 
 			<!-- Role - Visible immediately on load -->
 			<p
-				class="text-2xl md:text-3xl lg:text-4xl text-espresso-600 dark:text-gold-400/80 font-light mb-6 tracking-wide animate-fade-in-up"
+				class="text-2xl md:text-3xl lg:text-4xl text-espresso-600 dark:text-[#E11D2E]/80 font-light mb-6 tracking-wide animate-fade-in-up"
 				style="animation-delay: 800ms;"
 			>
 				{profile.role}
@@ -195,7 +195,7 @@
 				<Button
 					size="lg"
 					onclick={() => scrollToSection("projects")}
-					class="rounded-none px-8 py-6 text-sm tracking-wider bg-espresso-800 hover:bg-espresso-700 dark:bg-gold-500 dark:hover:bg-gold-400 dark:text-espresso-900 text-cream-50 border-0 transition-all duration-300 group"
+					class="rounded-none px-8 py-6 text-sm tracking-wider bg-espresso-800 hover:bg-espresso-700 dark:bg-transparent dark:hover:bg-[#E11D2E] dark:text-[#E11D2E] dark:border dark:border-[#E11D2E] dark:hover:text-[#0B0B0B] text-cream-50 border-0 transition-all duration-300 group"
 				>
 					<span class="mr-2">View Projects</span>
 					<ArrowRight
@@ -206,7 +206,7 @@
 					size="lg"
 					variant="outline"
 					onclick={() => scrollToSection("contact")}
-					class="rounded-none px-8 py-6 text-sm tracking-wider border-espresso-300 dark:border-espresso-600 hover:bg-espresso-100 dark:hover:bg-espresso-800/50 transition-all duration-300"
+					class="rounded-none px-8 py-6 text-sm tracking-wider border-espresso-300 dark:border-[#E11D2E] hover:bg-espresso-100 dark:hover:bg-[#E11D2E]/10 dark:text-[#E11D2E] transition-all duration-300"
 				>
 					<Mail class="w-4 h-4 mr-2" />
 					Contact
@@ -229,7 +229,7 @@
 						aria-label={social.name}
 					>
 						<Icon
-							class="w-5 h-5 text-muted-foreground/60 group-hover:text-gold-500 transition-colors duration-300"
+							class="w-5 h-5 text-muted-foreground/60 group-hover:text-[#E11D2E] transition-colors duration-300"
 						/>
 					</a>
 				{/each}
@@ -240,7 +240,7 @@
 	<!-- Scroll indicator - Visible immediately on load -->
 	<button
 		onclick={() => scrollToSection("about")}
-		class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-muted-foreground/40 hover:text-gold-500/60 transition-colors cursor-pointer group animate-fade-in"
+		class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-muted-foreground/40 hover:text-[#E11D2E]/60 transition-colors cursor-pointer group animate-fade-in"
 		style="animation-delay: 2200ms;"
 	>
 		<span class="text-xs uppercase tracking-[0.2em]">Explore</span>

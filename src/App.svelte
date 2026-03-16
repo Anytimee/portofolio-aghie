@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount } from "svelte";
 	import Navbar from "./sections/Navbar.svelte";
 	import Hero from "./sections/Hero.svelte";
 	import About from "./sections/About.svelte";
@@ -8,7 +8,7 @@
 	import Experience from "./sections/Experience.svelte";
 	import Contact from "./sections/Contact.svelte";
 	import Footer from "./sections/Footer.svelte";
-	import { initScrollDirection } from '$lib/utils/animation';
+	import { initScrollDirection } from "$lib/utils/animation";
 
 	onMount(() => {
 		initScrollDirection();
