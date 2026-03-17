@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { skills } from "$lib/data";
+	import { skillStore, type Skill } from "$lib/stores/skillStore";
 	import {
 		Card,
 		CardContent,
@@ -10,6 +11,34 @@
 	import { Code2, Server, Database, Wrench } from "lucide-svelte";
 	import { scrollDirectionAnimate } from "$lib/utils/animation";
 	import SpidermanFont from "$lib/components/SpidermanFont.svelte";
+
+	// Get skills from store
+	let allSkills: Skill[] = $state([]);
+	skillStore.subscribe((value) => {
+		allSkills = value;
+	});
+
+	// Fallback to original data if store is empty
+	let skillList = $derived(
+		allSkills.length > 0
+			? allSkills
+			: [
+					{ name: "JavaScript", category: "languages" },
+					{ name: "TypeScript", category: "languages" },
+					{ name: "Python", category: "languages" },
+					{ name: "SQL", category: "languages" },
+					{ name: "React", category: "frontend" },
+					{ name: "Svelte/SvelteKit", category: "frontend" },
+					{ name: "TailwindCSS", category: "frontend" },
+					{ name: "HTML/CSS", category: "frontend" },
+					{ name: "Node.js", category: "backend" },
+					{ name: "PostgreSQL", category: "backend" },
+					{ name: "REST APIs", category: "backend" },
+					{ name: "Git", category: "tools" },
+					{ name: "Vercel", category: "tools" },
+					{ name: "Figma", category: "tools" },
+				],
+	);
 
 	let skillCardRefs: HTMLDivElement[] = [];
 	let isDarkMode = $state(false);
@@ -32,11 +61,11 @@
 			attributeFilter: ["class"],
 		});
 	});
-	const categories = [
+	const categories = $derived([
 		{
 			title: "Frontend",
 			description: "Building beautiful user interfaces",
-			skills: skills.frontend,
+			skills: skillList.filter((s) => s.category === "frontend"),
 			delay: 0,
 			icon: Code2,
 			borderColor: "border-espresso-300 dark:border-espresso-600",
@@ -46,7 +75,7 @@
 		{
 			title: "Backend",
 			description: "Creating robust server solutions",
-			skills: skills.backend,
+			skills: skillList.filter((s) => s.category === "backend"),
 			delay: 200,
 			icon: Server,
 			borderColor: "border-espresso-300 dark:border-espresso-600",
@@ -56,14 +85,14 @@
 		{
 			title: "Tools",
 			description: "Development & deployment tools",
-			skills: skills.tools,
+			skills: skillList.filter((s) => s.category === "tools"),
 			delay: 600,
 			icon: Wrench,
 			borderColor: "border-espresso-300 dark:border-espresso-600",
 			hoverBorder:
 				"hover:border-espresso-400 dark:hover:border-espresso-500",
 		},
-	];
+	]);
 
 	// Map skill names to Lucide icons for better compatibility
 	const skillIconMap: Record<string, any> = {

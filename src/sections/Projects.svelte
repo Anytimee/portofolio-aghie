@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { projects } from "$lib/data";
+	import { projectStore } from "$lib/stores/projectStore";
 	import { Badge } from "$lib/components/ui";
 	import {
 		ExternalLink,
@@ -12,6 +12,12 @@
 	import { onMount } from "svelte";
 	import { fade, slide } from "svelte/transition";
 	import SpidermanFont from "$lib/components/SpidermanFont.svelte";
+
+	// Get projects from store
+	let projects: any = $state([]);
+	projectStore.subscribe((value) => {
+		projects = value;
+	});
 
 	let selectedProject = $state<number | null>(null);
 	let currentIndex = $state(0);

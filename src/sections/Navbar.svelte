@@ -76,17 +76,17 @@
       >
         <span class="relative">
           <span
-            class="text-espresso-800 dark:text-cream-100 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors duration-300"
+            class="text-espresso-800 dark:text-[#E11D2E] dark:group-hover:text-[#E11D2E] transition-colors duration-300 dark:animate-pulse"
           >
             {firstName}
           </span>
           <span
-            class="text-gold-500 group-hover:opacity-100 opacity-60 transition-opacity duration-300"
+            class="text-gold-500 dark:text-[#E11D2E] dark:group-hover:text-[#E11D2E] opacity-60 group-hover:opacity-100 transition-opacity duration-300 dark:animate-pulse"
           >
             {lastName}
           </span>
           <span
-            class="absolute -bottom-1 left-0 w-0 h-px bg-gold-500 group-hover:w-full transition-all duration-300"
+            class="absolute -bottom-1 left-0 w-0 h-px bg-gold-500 group-hover:w-full transition-all duration-300 dark:bg-[#E11D2E]"
           ></span>
         </span>
       </a>
