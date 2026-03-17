@@ -175,9 +175,9 @@
 			<!-- Name with elegant typography - Visible immediately with typing animation on load -->
 			<h1
 				class="text-display mb-8 animate-fade-in-up"
-				style="animation-delay: 600ms; font-family: {isDarkMode
-					? 'SpiderMan, sans-serif'
-					: 'inherit'}!important"
+				style="animation-delay: 600ms;{isDarkMode
+					? " font-family: 'SpiderMan, sans-serif'!important"
+					: ''}"
 			>
 				<span
 					class="text-muted-foreground font-normal"
