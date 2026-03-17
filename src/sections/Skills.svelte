@@ -12,14 +12,26 @@
 	import SpidermanFont from "$lib/components/SpidermanFont.svelte";
 
 	let skillCardRefs: HTMLDivElement[] = [];
-
+	let isDarkMode = $state(false);
 	const iconMap: Record<string, any> = {
 		Code2,
 		Server,
 		Database,
 		Wrench,
 	};
+	$effect(() => {
+		const checkDarkMode = () => {
+			isDarkMode = document.documentElement.classList.contains("dark");
+		};
 
+		checkDarkMode();
+
+		const observer = new MutationObserver(checkDarkMode);
+		observer.observe(document.documentElement, {
+			attributes: true,
+			attributeFilter: ["class"],
+		});
+	});
 	const categories = [
 		{
 			title: "Frontend",
@@ -111,6 +123,9 @@
 				<SpidermanFont>
 					<span
 						class="text-xs uppercase tracking-[0.2em] text-espresso-500 dark:text-cream-300 mb-4 block"
+						style={isDarkMode
+							? " font-family: 'The Amazing Spider-Man', sans-serif!important"
+							: ""}
 						use:scrollDirectionAnimate={{
 							type: "mysterious-fade",
 							delay: 200,
@@ -119,6 +134,9 @@
 					>
 					<h2
 						class="text-3xl md:text-4xl font-bold text-espresso-800 dark:text-cream-100 mb-4"
+						style={isDarkMode
+							? " font-family: 'The Amazing Spider-Man', sans-serif!important"
+							: ""}
 						use:scrollDirectionAnimate={{
 							type: "shadow-reveal",
 							delay: 400,

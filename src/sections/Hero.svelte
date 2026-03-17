@@ -163,12 +163,12 @@
 			<SpidermanFont>
 				<div
 					class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-card border border-border text-xs tracking-wide text-muted-foreground mb-10 animate-fade-in"
-					style="animation-delay: 300ms;"
+					style="animation-delay: 300ms; "
 				>
 					<span
 						class="w-1.5 h-1.5 rounded-full bg-gold-500 dark:bg-[#E11D2E] animate-mystic-pulse"
 					></span>
-					Available for projects ´
+					Available for projects
 				</div>
 			</SpidermanFont>
 
@@ -176,17 +176,17 @@
 			<h1
 				class="text-display mb-8 animate-fade-in-up"
 				style="animation-delay: 600ms;{isDarkMode
-					? " font-family: 'SpiderMan, sans-serif'!important"
+					? " font-family: 'The Amazing Spider-Man', sans-serif!important"
 					: ''}"
 			>
 				<span
 					class="text-muted-foreground font-normal"
-					style="animation-delay: 400ms;"
+					style="animation-delay: 400ms; "
 					>Hello, I'm
 				</span>
 				<br />
 				<span class="text-espresso-800 dark:text-cream-100"
-					>{typedName}{isDarkMode ? "  •" : ""}<span
+					>{typedName}{isDarkMode ? " •" : ""}<span
 						class="typing-cursor"
 						class:hidden={isTypingComplete}
 					></span></span
@@ -197,7 +197,9 @@
 			<SpidermanFont>
 				<p
 					class="text-2xl md:text-3xl lg:text-4xl text-espresso-600 dark:text-[#E11D2E]/80 font-light mb-6 tracking-wide animate-fade-in-up"
-					style="animation-delay: 800ms;"
+					style="animation-delay: 800ms; {isDarkMode
+						? " font-family: 'The Amazing Spider-Man', sans-serif!important"
+						: ''}"
 				>
 					{profile.role}
 				</p>
@@ -207,7 +209,9 @@
 			<SpidermanFont>
 				<p
 					class="text-lg md:text-xl text-muted-foreground/80 mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in-up"
-					style="animation-delay: 1100ms;"
+					style="animation-delay: 1100ms; {isDarkMode
+						? " font-family: 'The Amazing Spider-Man', sans-serif!important"
+						: ''}"
 				>
 					{profile.tagline}
 				</p>
@@ -222,6 +226,9 @@
 					size="lg"
 					onclick={() => scrollToSection("projects")}
 					class="rounded-none px-8 py-6 text-sm tracking-wider bg-espresso-800 hover:bg-espresso-700 dark:bg-transparent dark:hover:bg-[#E11D2E] dark:text-[#E11D2E] dark:border dark:border-[#E11D2E] dark:hover:text-[#0B0B0B] text-cream-50 border-0 transition-all duration-300 group"
+					style={isDarkMode
+						? " font-family: 'The Amazing Spider-Man', sans-serif!important"
+						: ""}
 				>
 					<span class="mr-2">View Projects</span>
 					<ArrowRight
@@ -233,6 +240,9 @@
 					variant="outline"
 					onclick={() => scrollToSection("contact")}
 					class="rounded-none px-8 py-6 text-sm tracking-wider border-espresso-300 dark:border-[#E11D2E] hover:bg-espresso-100 dark:hover:bg-[#E11D2E]/10 dark:text-[#E11D2E] transition-all duration-300"
+					style={isDarkMode
+						? " font-family: 'The Amazing Spider-Man', sans-serif!important"
+						: ""}
 				>
 					<Mail class="w-4 h-4 mr-2" />
 					Contact

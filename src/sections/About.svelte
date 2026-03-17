@@ -61,6 +61,9 @@
 				<div class="text-center mb-12">
 					<span
 						class="text-xs uppercase tracking-[0.2em] text-gold-500 dark:text-[#E11D2E] mb-4 block"
+						style={isDarkMode
+							? " font-family: 'The Amazing Spider-Man', sans-serif!important"
+							: ""}
 						use:scrollDirectionAnimate={{
 							type: "mysterious-fade",
 							delay: 200,
@@ -69,9 +72,9 @@
 					>
 					<h2
 						class="text-3xl md:text-4xl font-bold text-espresso-800 dark:text-cream-100 mb-4"
-						style="font-family: {isDarkMode
-							? 'SpiderMan, sans-serif'
-							: 'inherit'}!important"
+						style={isDarkMode
+							? " font-family: 'The Amazing Spider-Man', sans-serif!important"
+							: ""}
 						use:scrollDirectionAnimate={{
 							type: "shadow-reveal",
 							delay: 400,
