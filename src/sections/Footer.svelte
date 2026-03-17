@@ -44,7 +44,7 @@
           <span
             class="flex items-center gap-1 text-gold-500 dark:text-[#E11D2E]"
           >
-            Made with SVETLE
+            Made with SVELTE
           </span>
         </p>
       </div>

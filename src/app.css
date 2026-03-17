@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.font-spiderman {
+  font-family: 'SpiderMan', sans-serif !important;
+}
+
 /* ============================================
    MYSTERIOUS ANIMATIONS
    Subtle, premium scroll-triggered effects

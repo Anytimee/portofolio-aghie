@@ -12,6 +12,7 @@
 		MessageCircle,
 	} from "lucide-svelte";
 	import { scrollDirectionAnimate } from "$lib/utils/animation";
+	import SpidermanFont from "$lib/components/SpidermanFont.svelte";
 
 	let name = $state("");
 	let email = $state("");
@@ -19,6 +20,19 @@
 	let isSubmitting = $state(false);
 	let submitStatus = $state<"idle" | "success" | "error">("idle");
 	let errors = $state({ name: "", email: "", message: "" });
+	let isDarkMode = $state(false);
+
+	$effect(() => {
+		const checkDarkMode = () => {
+			isDarkMode = document.documentElement.classList.contains("dark");
+		};
+		checkDarkMode();
+		const observer = new MutationObserver(checkDarkMode);
+		observer.observe(document.documentElement, {
+			attributes: true,
+			attributeFilter: ["class"],
+		});
+	});
 
 	const profileEmail = profile.email;
 	const profileWhatsApp = profile.whatsapp;
@@ -107,24 +121,29 @@
 		<div class="max-w-6xl mx-auto">
 			<!-- Section Header - Mysterious fade -->
 			<div class="text-center mb-12">
-				<span
-					class="text-xs uppercase tracking-[0.2em] text-gold-500 dark:text-[#E11D2E] mb-4 block"
-					use:scrollDirectionAnimate={{
-						type: "mysterious-fade",
-						delay: 200,
-						duration: 800,
-					}}>Get in touch</span
-				>
-				<h2
-					class="text-3xl md:text-4xl font-bold text-espresso-800 dark:text-cream-100 mb-4"
-					use:scrollDirectionAnimate={{
-						type: "shadow-reveal",
-						delay: 400,
-						duration: 800,
-					}}
-				>
-					Contact
-				</h2>
+				<SpidermanFont>
+					<span
+						class="text-xs uppercase tracking-[0.2em] text-gold-500 dark:text-[#E11D2E] mb-4 block"
+						use:scrollDirectionAnimate={{
+							type: "mysterious-fade",
+							delay: 200,
+							duration: 800,
+						}}>Get in touch</span
+					>
+					<h2
+						class="text-3xl md:text-4xl font-bold text-espresso-800 dark:text-cream-100 mb-4"
+						style="font-family: {isDarkMode
+							? 'SpiderMan, sans-serif'
+							: 'inherit'}!important"
+						use:scrollDirectionAnimate={{
+							type: "shadow-reveal",
+							delay: 400,
+							duration: 800,
+						}}
+					>
+						Contact
+					</h2>
+				</SpidermanFont>
 				<p
 					class="text-muted-foreground text-lg max-w-2xl mx-auto mt-4 leading-relaxed"
 					use:scrollDirectionAnimate={{

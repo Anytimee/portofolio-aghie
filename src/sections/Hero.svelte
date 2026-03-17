@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Button } from "$lib/components/ui";
 	import { profile, socials } from "$lib/data";
+	import SpidermanFont from "$lib/components/SpidermanFont.svelte";
 	import {
 		Github,
 		Linkedin,
@@ -19,6 +20,7 @@
 	let heroElement: HTMLElement;
 	let typingTimeout: ReturnType<typeof setTimeout> | null = null;
 	let wasInView = $state(false);
+	let isDarkMode = $state(false);
 
 	onMount(() => {
 		mounted = true;
@@ -85,6 +87,21 @@
 		typeChar();
 	};
 
+	// Check dark mode
+	$effect(() => {
+		const checkDarkMode = () => {
+			isDarkMode = document.documentElement.classList.contains("dark");
+		};
+
+		checkDarkMode();
+
+		const observer = new MutationObserver(checkDarkMode);
+		observer.observe(document.documentElement, {
+			attributes: true,
+			attributeFilter: ["class"],
+		});
+	});
+
 	const scrollToSection = (sectionId: string) => {
 		const element = document.getElementById(sectionId);
 		if (element) {
@@ -143,28 +160,33 @@
 	<div class="container mx-auto px-6 relative z-10">
 		<div class="max-w-4xl mx-auto text-center">
 			<!-- Available indicator - Visible immediately on load -->
-			<div
-				class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-card border border-border text-xs tracking-wide text-muted-foreground mb-10 animate-fade-in"
-				style="animation-delay: 300ms;"
-			>
-				<span
-					class="w-1.5 h-1.5 rounded-full bg-gold-500 dark:bg-[#E11D2E] animate-mystic-pulse"
-				></span>
-				Available for projects
-			</div>
+			<SpidermanFont>
+				<div
+					class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-card border border-border text-xs tracking-wide text-muted-foreground mb-10 animate-fade-in"
+					style="animation-delay: 300ms;"
+				>
+					<span
+						class="w-1.5 h-1.5 rounded-full bg-gold-500 dark:bg-[#E11D2E] animate-mystic-pulse"
+					></span>
+					Available for projects ´
+				</div>
+			</SpidermanFont>
 
 			<!-- Name with elegant typography - Visible immediately with typing animation on load -->
 			<h1
 				class="text-display mb-8 animate-fade-in-up"
-				style="animation-delay: 600ms;"
+				style="animation-delay: 600ms; font-family: {isDarkMode
+					? 'SpiderMan, sans-serif'
+					: 'inherit'}!important"
 			>
 				<span
 					class="text-muted-foreground font-normal"
-					style="animation-delay: 400ms;">Hello, I'm</span
-				>
+					style="animation-delay: 400ms;"
+					>Hello, I'm
+				</span>
 				<br />
 				<span class="text-espresso-800 dark:text-cream-100"
-					>{typedName}<span
+					>{typedName}{isDarkMode ? "  •" : ""}<span
 						class="typing-cursor"
 						class:hidden={isTypingComplete}
 					></span></span
@@ -172,20 +194,24 @@
 			</h1>
 
 			<!-- Role - Visible immediately on load -->
-			<p
-				class="text-2xl md:text-3xl lg:text-4xl text-espresso-600 dark:text-[#E11D2E]/80 font-light mb-6 tracking-wide animate-fade-in-up"
-				style="animation-delay: 800ms;"
-			>
-				{profile.role}
-			</p>
+			<SpidermanFont>
+				<p
+					class="text-2xl md:text-3xl lg:text-4xl text-espresso-600 dark:text-[#E11D2E]/80 font-light mb-6 tracking-wide animate-fade-in-up"
+					style="animation-delay: 800ms;"
+				>
+					{profile.role}
+				</p>
+			</SpidermanFont>
 
 			<!-- Tagline - Visible immediately on load -->
-			<p
-				class="text-lg md:text-xl text-muted-foreground/80 mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in-up"
-				style="animation-delay: 1100ms;"
-			>
-				{profile.tagline}
-			</p>
+			<SpidermanFont>
+				<p
+					class="text-lg md:text-xl text-muted-foreground/80 mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in-up"
+					style="animation-delay: 1100ms;"
+				>
+					{profile.tagline}
+				</p>
+			</SpidermanFont>
 
 			<!-- CTA Buttons - Visible immediately on load -->
 			<div

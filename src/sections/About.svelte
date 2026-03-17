@@ -3,6 +3,8 @@
 	import { MapPin, ArrowRight } from "lucide-svelte";
 	import { scrollDirectionAnimate } from "$lib/utils/animation";
 	import { onMount } from "svelte";
+	import ProtectedImage from "$lib/components/ProtectedImage.svelte";
+	import SpidermanFont from "$lib/components/SpidermanFont.svelte";
 
 	let isDarkMode = $state(false);
 	let isHovering = $state(false);
@@ -55,26 +57,31 @@
 	<div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 		<div class="max-w-6xl mx-auto">
 			<!-- Section Header - Mysterious fade -->
-			<div class="text-center mb-12">
-				<span
-					class="text-xs uppercase tracking-[0.2em] text-gold-500 dark:text-[#E11D2E] mb-4 block"
-					use:scrollDirectionAnimate={{
-						type: "mysterious-fade",
-						delay: 200,
-						duration: 800,
-					}}>Get to know me</span
-				>
-				<h2
-					class="text-3xl md:text-4xl font-bold text-espresso-800 dark:text-cream-100 mb-4"
-					use:scrollDirectionAnimate={{
-						type: "shadow-reveal",
-						delay: 400,
-						duration: 800,
-					}}
-				>
-					About Me
-				</h2>
-			</div>
+			<SpidermanFont>
+				<div class="text-center mb-12">
+					<span
+						class="text-xs uppercase tracking-[0.2em] text-gold-500 dark:text-[#E11D2E] mb-4 block"
+						use:scrollDirectionAnimate={{
+							type: "mysterious-fade",
+							delay: 200,
+							duration: 800,
+						}}>Get to know me</span
+					>
+					<h2
+						class="text-3xl md:text-4xl font-bold text-espresso-800 dark:text-cream-100 mb-4"
+						style="font-family: {isDarkMode
+							? 'SpiderMan, sans-serif'
+							: 'inherit'}!important"
+						use:scrollDirectionAnimate={{
+							type: "shadow-reveal",
+							delay: 400,
+							duration: 800,
+						}}
+					>
+						About Me
+					</h2>
+				</div>
+			</SpidermanFont>
 
 			<div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
 				<!-- 3D Avatar - Shadow reveal from darkness -->
@@ -106,10 +113,10 @@
 							aria-label="Avatar"
 						>
 							<!-- Base Avatar -->
-							<img
+							<ProtectedImage
 								src="/avatar.jpg"
 								alt="Avatar"
-								class="w-full h-full object-cover"
+								className="w-full h-full object-cover"
 							/>
 
 							<!-- Spider-Man Reveal (Dark Mode Only) -->
@@ -119,10 +126,10 @@
 									class:visible={isHovering}
 									style="--mouse-x: {mouseX}%; --mouse-y: {mouseY}%;"
 								>
-									<img
+									<ProtectedImage
 										src="/spiderman.jpg"
 										alt="Spider-Man"
-										class="w-full h-full object-cover"
+										className="w-full h-full object-cover"
 									/>
 								</div>
 							{/if}

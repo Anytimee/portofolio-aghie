@@ -4,6 +4,7 @@
    * Shows spiderman.jpg through a circular cursor mask when hovering in dark mode
    * Only activates in dark mode
    */
+  import ProtectedImage from "./ProtectedImage.svelte";
 
   let { showQuote = true, size = 280 } = $props();
 
@@ -61,7 +62,7 @@
   aria-label="Avatar"
 >
   <!-- Base Avatar (always visible) -->
-  <img src="/avatar.jpg" alt="Avatar" class="base-avatar" />
+  <ProtectedImage src="/avatar.jpg" alt="Avatar" className="base-avatar" />
 
   <!-- Spider-Man Layer (only visible in dark mode with cursor reveal) -->
   {#if isDarkMode}
@@ -73,10 +74,10 @@
         --mask-y: {mouseY}%;
       "
     >
-      <img
+      <ProtectedImage
         src="/spiderman.jpg"
         alt="Spider-Man Avatar"
-        class="spiderman-avatar"
+        className="spiderman-avatar"
       />
     </div>
   {/if}

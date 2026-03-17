@@ -11,10 +11,23 @@
 	import { scrollDirectionAnimate } from "$lib/utils/animation";
 	import { onMount } from "svelte";
 	import { fade, slide } from "svelte/transition";
+	import SpidermanFont from "$lib/components/SpidermanFont.svelte";
 
 	let selectedProject = $state<number | null>(null);
 	let currentIndex = $state(0);
 	let isMobile = $state(false);
+	let isDarkMode = $state(false);
+	$effect(() => {
+		const checkDarkMode = () => {
+			isDarkMode = document.documentElement.classList.contains("dark");
+		};
+		checkDarkMode();
+		const observer = new MutationObserver(checkDarkMode);
+		observer.observe(document.documentElement, {
+			attributes: true,
+			attributeFilter: ["class"],
+		});
+	});
 
 	function checkMobile() {
 		isMobile = window.innerWidth < 768;
@@ -73,26 +86,31 @@
 	<div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 		<div class="max-w-6xl mx-auto">
 			<!-- Section Header -->
-			<div class="text-center mb-12">
-				<span
-					class="text-xs uppercase tracking-[0.2em] text-gold-500 dark:text-[#E11D2E] mb-4 block"
-					use:scrollDirectionAnimate={{
-						type: "mysterious-fade",
-						delay: 200,
-						duration: 800,
-					}}>My work</span
-				>
-				<h2
-					class="text-3xl md:text-4xl font-bold text-espresso-800 dark:text-cream-100 mb-4"
-					use:scrollDirectionAnimate={{
-						type: "shadow-reveal",
-						delay: 400,
-						duration: 800,
-					}}
-				>
-					Projects
-				</h2>
-			</div>
+			<SpidermanFont>
+				<div class="text-center mb-12">
+					<span
+						class="text-xs uppercase tracking-[0.2em] text-gold-500 dark:text-[#E11D2E] mb-4 block"
+						use:scrollDirectionAnimate={{
+							type: "mysterious-fade",
+							delay: 200,
+							duration: 800,
+						}}>My work</span
+					>
+					<h2
+						class="text-3xl md:text-4xl font-bold text-espresso-800 dark:text-cream-100 mb-4"
+						style="font-family: {isDarkMode
+							? 'SpiderMan, sans-serif'
+							: 'inherit'}!important"
+						use:scrollDirectionAnimate={{
+							type: "shadow-reveal",
+							delay: 400,
+							duration: 800,
+						}}
+					>
+						Projects
+					</h2>
+				</div>
+			</SpidermanFont>
 
 			<!-- Project Selection Grid (when no project selected) -->
 			{#if selectedProject === null}
