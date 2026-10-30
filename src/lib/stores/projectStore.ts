@@ -23,7 +23,7 @@ function createProjectStore() {
             image: "/project1.png",
             technologies: ["React", "TailwindCSS", "Node.js", "PostgreSQL"],
             demoUrl: "https://storeia.my.id",
-            githubUrl: "https://github.com/user/ecommerce"
+            githubUrl: ""
         },
         {
             id: 2,
@@ -32,7 +32,7 @@ function createProjectStore() {
             image: "/project2.png",
             technologies: ["React", "Svelte", "TailwindCSS", "Supabase"],
             demoUrl: "https://ruang-indah.vercel.app/",
-            githubUrl: "https://github.com/user/coffee-shop"
+            githubUrl: ""
         }
     ];
 
