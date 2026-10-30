@@ -1,6 +1,6 @@
 /**
  * Experience data for Full Stack Developer portfolio
- * 
+ *
  * Type categories:
  * - education: Formal schooling
  * - project: Personal or professional projects
@@ -13,24 +13,38 @@ export const experience = [
   {
     id: 1,
     type: "education",
-    work: "SMA 2 Pandeglang",
-    role: "Student",
-    period: "2023 - 2026",
-    description: "Social Studies major with a passion for technology and web development."
+    work: "Universitas Pamulang (Unpam)",
+    role: "S1 Sistem Informasi",
+    period: "2026 – Sekarang",
+    description:
+      "Mempelajari dasar pemrograman dan pengembangan web, sambil membangun proyek pribadi untuk memperkuat skill praktik."
   },
   {
     id: 2,
     type: "project",
+    work: "Coffee Shop E-commerce Website",
     role: "Full-stack Developer",
-    period: "2024 - 2025",
-    description: "Developed an anime streaming and gallery website using Laravel, HTML, Node.js, and TailwindCSS."
+    period: "2026",
+    description:
+      "Membangun situs e-commerce coffee shop dengan React, Tailwind CSS, Node.js, dan PostgreSQL."
   },
   {
     id: 3,
     type: "project",
-    role: "Full-stack Developer",
-    period: "2026",
-    description: "Developed a beautiful e-commerce and coffee shop website with React, tailwindCSS nodejs and postgreSQL."
+    work: "Anime Streaming & Gallery Website",
+    role: "Web Developer",
+    period: "2024",
+    description:
+    "Belajar membangun situs streaming dan galeri anime menggunakan Laravel, Node.js, HTML, dan Tailwind CSS."
+  },
+  {
+    id: 4,
+    type: "education",
+    work: "SMA 2 Pandeglang",
+    role: "Student — Social Studies",
+    period: "2023 – 2026",
+    description:
+      "Jurusan IPS dengan ketertarikan pada teknologi, mulai belajar web development secara mandiri."
   },
 ];
 

@@ -19,11 +19,11 @@
 		},
 		{
 			year: "Learning",
-			description: "Mastered Svelte, React, and modern frontend tools",
+			description: "Explored Svelte, React, and modern tooling like Vite and Tailwind CSS",
 		},
 		{
 			year: "Growing",
-			description: "Built real-world projects with Node.js and databases",
+			description: "Started learning backend development with Node.js and PostgreSQL",
 		},
 		{
 			year: "Now",

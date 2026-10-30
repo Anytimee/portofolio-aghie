@@ -36,7 +36,6 @@
 					{ name: "REST APIs", category: "backend" },
 					{ name: "Git", category: "tools" },
 					{ name: "Vercel", category: "tools" },
-					{ name: "Figma", category: "tools" },
 				],
 	);
 

@@ -27,7 +27,6 @@ const initialSkills: Skill[] = [
     // Tools
     { name: "Git", category: "tools" },
     { name: "Vercel", category: "tools" },
-    { name: "Figma", category: "tools" }
 ];
 
 function createSkillStore() {

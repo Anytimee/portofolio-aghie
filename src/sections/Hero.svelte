@@ -160,17 +160,6 @@
 	<div class="container mx-auto px-6 relative z-10">
 		<div class="max-w-4xl mx-auto text-center">
 			<!-- Available indicator - Visible immediately on load -->
-			<SpidermanFont>
-				<div
-					class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-card border border-border text-xs tracking-wide text-muted-foreground mb-10 animate-fade-in"
-					style="animation-delay: 300ms; "
-				>
-					<span
-						class="w-1.5 h-1.5 rounded-full bg-gold-500 dark:bg-[#E11D2E] animate-mystic-pulse"
-					></span>
-					Available for projects
-				</div>
-			</SpidermanFont>
 
 			<!-- Name with elegant typography - Visible immediately with typing animation on load -->
 			<h1
