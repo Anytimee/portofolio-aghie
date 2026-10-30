@@ -79,7 +79,7 @@
 		return () => window.removeEventListener("keydown", handleKeydown);
 	});
 
-	const projectTitles = ["Storeia", "Ruang Indah", "Portfolio", "Weather"];
+	const projectTitles = ["Storeia", "Ruang Indah", "Musubi", "Digitalisasi Sunnah"];
 </script>
 
 <section id="projects" class="py-12 md:py-16 relative overflow-hidden">
