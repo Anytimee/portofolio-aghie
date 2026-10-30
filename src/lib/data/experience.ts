@@ -11,7 +11,7 @@
 
 export const experience = [
   {
-    id: 1,
+    id: 0,
     type: "education",
     work: "Universitas Pamulang (Unpam)",
     role: "S1 Sistem Informasi",
@@ -20,7 +20,25 @@ export const experience = [
       "Mempelajari dasar pemrograman dan pengembangan web, sambil membangun proyek pribadi untuk memperkuat skill praktik."
   },
   {
+    id: 1,
+    type: "project",
+    work: "Digitalisasi Sunnah Website",
+    role: "Full-stack Developer",
+    period: "2026",
+    description:
+      "Membangun situs digitalisasi sunnah menggunakan Svelte dan Node.js."
+  },
+  {
     id: 2,
+    type: "project",
+    work: "Musubi Social Website",
+    role: "Full-stack Developer",
+    period: "2026",
+    description:
+      "Membangun situs media sosial dengan React, Tailwind CSS, dan Node.js."
+  },
+  {
+    id: 3,
     type: "project",
     work: "Coffee Shop E-commerce Website",
     role: "Full-stack Developer",
@@ -29,7 +47,7 @@ export const experience = [
       "Membangun situs e-commerce coffee shop dengan React, Tailwind CSS, Node.js, dan PostgreSQL."
   },
   {
-    id: 3,
+    id: 4,
     type: "project",
     work: "Anime Streaming & Gallery Website",
     role: "Web Developer",
@@ -38,7 +56,7 @@ export const experience = [
     "Belajar membangun situs streaming dan galeri anime menggunakan Laravel, Node.js, HTML, dan Tailwind CSS."
   },
   {
-    id: 4,
+    id: 5,
     type: "education",
     work: "SMA 2 Pandeglang",
     role: "Student — Social Studies",
